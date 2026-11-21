@@ -7821,7 +7821,6 @@ async function loadGuduoRank(params = {}) {
 
       results.push({
         id: item.tmdbId ? item.tmdbId.toString() : item.title,
-        type: "tmdb", 
         
         // 纯净的剧名
         title: item.tmdbTitle || item.title,
