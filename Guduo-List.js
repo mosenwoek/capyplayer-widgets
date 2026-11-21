@@ -83,7 +83,10 @@ async function loadGuduoRank(params = {}) {
         // 把排名 (TOP x) 移到了简介的第一行，旁边跟着热度和评分
         description: `🏆 TOP ${item.rank} | 🔥 热度: ${item.heat} | 评分: ${item.rating}\n\n${item.overview}`,
         
-        coverUrl: coverUrl, posterUrl: item.posterPath,
+        // 竖版卡片读 posterUrl（完整 URL），横版读 coverUrl；backdropUrl 兜底
+        coverUrl: coverUrl,
+        posterUrl: coverUrl,
+        backdropUrl: coverUrl,
         releaseDate: item.releaseDate,
         mediaType: item.mediaType,
         rating: item.rating,
