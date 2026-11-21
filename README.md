@@ -1,1 +1,1 @@
-Capyplayer模块  玛卡巴卡维护
+收集，整理，转换的Capyplayer模块
