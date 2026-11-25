@@ -222,16 +222,40 @@ var WidgetMetadata = {
               "value": "0"
             },
             {
-              "title": "🎭 各平台剧场",
+              "title": "🫘 豆瓣热榜-热评",
               "value": "1"
             },
             {
-              "title": "🌸 热门番剧",
+              "title": "🎭 各平台剧场",
               "value": "2"
             },
             {
-              "title": "🥭 芒果TV热榜",
+              "title": "🌸 热门番剧",
               "value": "3"
+            },
+            {
+              "title": "🥭 芒果TV热榜",
+              "value": "4"
+            },
+            {
+              "title": "📡 流媒体 TOP 10",
+              "value": "5"
+            },
+            {
+              "title": "📡 流媒体 TOP 10（排名）",
+              "value": "6"
+            },
+            {
+              "title": "📁 爱优腾芒哔-看点",
+              "value": "7"
+            },
+            {
+              "title": "🔥 骨朵热榜",
+              "value": "8"
+            },
+            {
+              "title": "📊 动画疯人气榜",
+              "value": "9"
             }
           ]
         },
@@ -286,6 +310,86 @@ var WidgetMetadata = {
           }
         },
         {
+          "name": "channel_1",
+          "title": "榜单分类",
+          "type": "enum",
+          "value": "tv",
+          "enumOptions": [
+            {
+              "title": "全部剧集",
+              "value": "tv"
+            },
+            {
+              "title": "大陆剧集",
+              "value": "tv_domestic"
+            },
+            {
+              "title": "欧美剧集",
+              "value": "tv_american"
+            },
+            {
+              "title": "日本剧集",
+              "value": "tv_japanese"
+            },
+            {
+              "title": "南韩剧集",
+              "value": "tv_korean"
+            },
+            {
+              "title": "动漫番剧",
+              "value": "tv_animation"
+            },
+            {
+              "title": "纪录片",
+              "value": "tv_documentary"
+            },
+            {
+              "title": "大陆综艺",
+              "value": "show_domestic"
+            },
+            {
+              "title": "国外综艺",
+              "value": "show_foreign"
+            }
+          ],
+          "label": "榜单分类",
+          "defaultValue": "tv",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "1"
+          }
+        },
+        {
+          "name": "channel_7",
+          "title": "频道",
+          "type": "enum",
+          "value": "tv",
+          "enumOptions": [
+            {
+              "title": "电视剧",
+              "value": "tv"
+            },
+            {
+              "title": "电影",
+              "value": "movie"
+            },
+            {
+              "title": "动漫",
+              "value": "anime"
+            },
+            {
+              "title": "综艺",
+              "value": "variety"
+            }
+          ],
+          "label": "频道",
+          "defaultValue": "tv",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "7"
+          }
+        },
+        {
           "name": "sort_type",
           "title": "排序方式",
           "type": "enum",
@@ -324,7 +428,31 @@ var WidgetMetadata = {
               "0",
               "1",
               "2",
-              "3"
+              "3",
+              "4"
+            ]
+          }
+        },
+        {
+          "name": "language",
+          "title": "语言",
+          "type": "language",
+          "value": "zh-CN",
+          "label": "语言",
+          "defaultValue": "zh-CN",
+          "belongTo": {
+            "paramName": "sub",
+            "value": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9"
             ]
           }
         },
@@ -399,7 +527,7 @@ var WidgetMetadata = {
           "defaultValue": "迷雾剧场",
           "belongTo": {
             "paramName": "sub",
-            "value": "1"
+            "value": "2"
           }
         },
         {
@@ -425,7 +553,7 @@ var WidgetMetadata = {
           "defaultValue": "all",
           "belongTo": {
             "paramName": "sub",
-            "value": "1"
+            "value": "2"
           }
         },
         {
@@ -475,7 +603,7 @@ var WidgetMetadata = {
           "defaultValue": "",
           "belongTo": {
             "paramName": "sub",
-            "value": "2"
+            "value": "3"
           }
         },
         {
@@ -497,8 +625,517 @@ var WidgetMetadata = {
           "defaultValue": "tv",
           "belongTo": {
             "paramName": "sub",
-            "value": "3"
+            "value": "4"
           }
+        },
+        {
+          "name": "country",
+          "title": "国家/地区",
+          "type": "enum",
+          "value": "united-states",
+          "enumOptions": [
+            {
+              "title": "全球",
+              "value": "world"
+            },
+            {
+              "title": "美国",
+              "value": "united-states"
+            },
+            {
+              "title": "台湾",
+              "value": "taiwan"
+            },
+            {
+              "title": "香港",
+              "value": "hong-kong"
+            },
+            {
+              "title": "新加坡",
+              "value": "singapore"
+            },
+            {
+              "title": "韩国",
+              "value": "south-korea"
+            },
+            {
+              "title": "日本",
+              "value": "japan"
+            }
+          ],
+          "label": "国家/地区",
+          "defaultValue": "united-states",
+          "belongTo": {
+            "paramName": "sub",
+            "value": [
+              "5",
+              "6"
+            ]
+          }
+        },
+        {
+          "name": "platform_5",
+          "title": "流媒体平台",
+          "type": "enum",
+          "value": "netflix",
+          "enumOptions": [
+            {
+              "title": "全部平台",
+              "value": "all"
+            },
+            {
+              "title": "Netflix",
+              "value": "netflix"
+            },
+            {
+              "title": "Disney+",
+              "value": "disney"
+            },
+            {
+              "title": "Apple TV",
+              "value": "apple-tv"
+            },
+            {
+              "title": "Amazon Prime",
+              "value": "amazon-prime"
+            },
+            {
+              "title": "HBO Max",
+              "value": "hbo-max"
+            },
+            {
+              "title": "Paramount+",
+              "value": "paramount-plus"
+            },
+            {
+              "title": "Hulu",
+              "value": "hulu"
+            },
+            {
+              "title": "Peacock",
+              "value": "peacock"
+            }
+          ],
+          "label": "流媒体平台",
+          "defaultValue": "netflix",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "5"
+          }
+        },
+        {
+          "name": "platform_6",
+          "title": "流媒体平台",
+          "type": "enum",
+          "value": "netflix",
+          "enumOptions": [
+            {
+              "title": "Netflix",
+              "value": "netflix"
+            },
+            {
+              "title": "Disney+",
+              "value": "disney"
+            },
+            {
+              "title": "Apple TV",
+              "value": "apple-tv"
+            },
+            {
+              "title": "Amazon Prime",
+              "value": "amazon-prime"
+            },
+            {
+              "title": "HBO Max",
+              "value": "hbo-max"
+            },
+            {
+              "title": "Paramount+",
+              "value": "paramount-plus"
+            },
+            {
+              "title": "Hulu",
+              "value": "hulu"
+            },
+            {
+              "title": "Peacock",
+              "value": "peacock"
+            }
+          ],
+          "label": "流媒体平台",
+          "defaultValue": "netflix",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "6"
+          }
+        },
+        {
+          "name": "chart_5",
+          "title": "榜单类型",
+          "type": "enum",
+          "value": "all",
+          "enumOptions": [
+            {
+              "title": "电影 + 剧集",
+              "value": "all"
+            },
+            {
+              "title": "电影 TOP 10",
+              "value": "movies"
+            },
+            {
+              "title": "剧集 TOP 10",
+              "value": "tv"
+            },
+            {
+              "title": "综合 TOP 10",
+              "value": "overall"
+            },
+            {
+              "title": "儿童电影",
+              "value": "kids_movies"
+            },
+            {
+              "title": "儿童剧集",
+              "value": "kids_tv"
+            }
+          ],
+          "label": "榜单类型",
+          "defaultValue": "all",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "5"
+          }
+        },
+        {
+          "name": "chart_6",
+          "title": "榜单类型",
+          "type": "enum",
+          "value": "tv",
+          "enumOptions": [
+            {
+              "title": "剧集 TOP 10",
+              "value": "tv"
+            },
+            {
+              "title": "电影 TOP 10",
+              "value": "movies"
+            }
+          ],
+          "label": "榜单类型",
+          "defaultValue": "tv",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "6"
+          }
+        },
+        {
+          "name": "tag_7",
+          "title": "类型标签",
+          "type": "string",
+          "value": "all",
+          "placeholders": [
+            {
+              "title": "全部标签",
+              "value": "all"
+            },
+            {
+              "title": "古装",
+              "value": "古装"
+            },
+            {
+              "title": "悬疑",
+              "value": "悬疑"
+            },
+            {
+              "title": "爱情",
+              "value": "爱情"
+            },
+            {
+              "title": "喜剧",
+              "value": "喜剧"
+            },
+            {
+              "title": "都市",
+              "value": "都市"
+            },
+            {
+              "title": "家庭",
+              "value": "家庭"
+            },
+            {
+              "title": "动作",
+              "value": "动作"
+            },
+            {
+              "title": "科幻",
+              "value": "科幻"
+            },
+            {
+              "title": "动画",
+              "value": "动画"
+            },
+            {
+              "title": "哔哩哔哩国创",
+              "value": "哔哩哔哩国创"
+            },
+            {
+              "title": "游戏节目",
+              "value": "游戏节目"
+            },
+            {
+              "title": "真人秀",
+              "value": "真人秀"
+            },
+            {
+              "title": "纪录",
+              "value": "纪录"
+            }
+          ],
+          "label": "类型标签",
+          "defaultValue": "all",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "7"
+          }
+        },
+        {
+          "name": "tag_9",
+          "title": "属性",
+          "type": "enum",
+          "value": "动作",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "9"
+          },
+          "enumOptions": [
+            {
+              "title": "动作",
+              "value": "动作"
+            },
+            {
+              "title": "冒险",
+              "value": "冒险"
+            },
+            {
+              "title": "奇幻",
+              "value": "奇幻"
+            },
+            {
+              "title": "异世界",
+              "value": "异世界"
+            },
+            {
+              "title": "科幻",
+              "value": "科幻"
+            },
+            {
+              "title": "校园",
+              "value": "校园"
+            },
+            {
+              "title": "喜剧",
+              "value": "喜剧"
+            },
+            {
+              "title": "恋爱",
+              "value": "恋爱"
+            },
+            {
+              "title": "悬疑",
+              "value": "悬疑"
+            },
+            {
+              "title": "运动",
+              "value": "运动"
+            },
+            {
+              "title": "特摄",
+              "value": "特摄"
+            },
+            {
+              "title": "BL",
+              "value": "BL"
+            },
+            {
+              "title": "GL",
+              "value": "GL"
+            }
+          ],
+          "label": "属性",
+          "defaultValue": "动作"
+        },
+        {
+          "name": "sort_7",
+          "title": "排序",
+          "type": "enum",
+          "value": "heat",
+          "enumOptions": [
+            {
+              "title": "热度优先",
+              "value": "heat"
+            },
+            {
+              "title": "最近更新",
+              "value": "updated"
+            },
+            {
+              "title": "最新上线",
+              "value": "new"
+            },
+            {
+              "title": "高分优先",
+              "value": "rating"
+            }
+          ],
+          "label": "排序",
+          "defaultValue": "heat",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "7"
+          }
+        },
+        {
+          "name": "sort_9",
+          "title": "排序",
+          "type": "enum",
+          "value": "monthly",
+          "enumOptions": [
+            {
+              "title": "月人气排行",
+              "value": "monthly"
+            },
+            {
+              "title": "年份排序",
+              "value": "yearly"
+            }
+          ],
+          "label": "排序",
+          "defaultValue": "monthly",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "9"
+          }
+        },
+        {
+          "name": "category_8",
+          "title": "榜单分类",
+          "type": "enum",
+          "value": "剧集",
+          "enumOptions": [
+            {
+              "title": "陆剧",
+              "value": "剧集"
+            },
+            {
+              "title": "国漫",
+              "value": "动漫"
+            },
+            {
+              "title": "综艺",
+              "value": "综艺"
+            },
+            {
+              "title": "电影",
+              "value": "电影"
+            }
+          ],
+          "label": "榜单分类",
+          "defaultValue": "剧集",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "8"
+          }
+        },
+        {
+          "name": "category_9",
+          "title": "类型",
+          "type": "enum",
+          "value": "电影",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "9"
+          },
+          "enumOptions": [
+            {
+              "title": "电影",
+              "value": "电影"
+            },
+            {
+              "title": "OVA",
+              "value": "OVA"
+            },
+            {
+              "title": "双语",
+              "value": "双语"
+            },
+            {
+              "title": "泡面番",
+              "value": "泡面番"
+            },
+            {
+              "title": "真人演出",
+              "value": "真人演出"
+            }
+          ],
+          "label": "类型",
+          "defaultValue": "电影"
+        },
+        {
+          "name": "filter",
+          "title": "筛选方式",
+          "type": "enum",
+          "value": "all",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "9"
+          },
+          "enumOptions": [
+            {
+              "title": "全部",
+              "value": "all"
+            },
+            {
+              "title": "属性",
+              "value": "tags"
+            },
+            {
+              "title": "类型",
+              "value": "categories"
+            },
+            {
+              "title": "对象",
+              "value": "targets"
+            }
+          ],
+          "label": "筛选方式",
+          "defaultValue": "all"
+        },
+        {
+          "name": "target",
+          "title": "对象",
+          "type": "enum",
+          "value": "阖家观赏",
+          "belongTo": {
+            "paramName": "sub",
+            "value": "9"
+          },
+          "enumOptions": [
+            {
+              "title": "阖家观赏",
+              "value": "阖家观赏"
+            },
+            {
+              "title": "付费会员",
+              "value": "付费会员"
+            },
+            {
+              "title": "年龄限制",
+              "value": "年龄限制"
+            }
+          ],
+          "label": "对象",
+          "defaultValue": "阖家观赏"
         },
         {
           "name": "page",
@@ -1743,6 +2380,27 @@ var WidgetMetadata = {
           "__global": true,
           "label": "Trakt Client ID",
           "defaultValue": "",
+          "belongTo": {
+            "paramName": "sub",
+            "value": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
+            ]
+          }
+        },
+        {
+          "name": "language",
+          "title": "语言",
+          "type": "language",
+          "value": "zh-CN",
+          "__global": true,
+          "label": "语言",
+          "defaultValue": "zh-CN",
           "belongTo": {
             "paramName": "sub",
             "value": [
@@ -6623,7 +7281,7 @@ var __ChPoly=(()=>{var es=Object.create;var Lt=Object.defineProperty;var us=Obje
 
 
 /* ---- 子功能映射表 ---- */
-const MAKKA_SUBS = {"ALLINONE":[{"label":"全网热播发现","fn":"loadPlatformList","defaults":{"sort_by":"netflix","mediaType":"tv","sortBy":"hot"},"keys":["sort_by","mediaType","sortBy","page"],"rename":{}}],"AutomatedList":[{"label":"豆瓣热榜","fn":"loadDouban","defaults":{"channel":"tv","sort_type":"default"},"keys":["channel","sort_type","page"],"rename":{}},{"label":"各平台剧场","fn":"loadTheater","defaults":{"brand":"迷雾剧场","status":"all","sort_type":"default"},"keys":["brand","status","sort_type","page"],"rename":{}},{"label":"热门番剧","fn":"loadBangumi","defaults":{"genre":"","sort_type":"default"},"keys":["genre","sort_type","page"],"rename":{}},{"label":"芒果TV热榜","fn":"loadMangoTV","defaults":{"sort_by":"tv","sort_type":"default"},"keys":["sort_by","sort_type","page"],"rename":{}}],"Globalseries":[{"label":"🌍 全球探索发现","fn":"loadGlobalList","defaults":{"region":"CN","mediaType":"all","sort_by":"hot"},"keys":["region","mediaType","sort_by","page"],"rename":{}},{"label":"🏷️ 高级类型榜单","fn":"Globalseries__loadGenreRank","defaults":{"mediaType":"movie","genre":"scifi","region":"all","sort_by":"popularity"},"keys":["mediaType_1","genre","region_1","sort_by_1","page"],"rename":{"mediaType_1":"mediaType","region_1":"region","sort_by_1":"sort_by"}}],"Guduo-List":[{"label":"骨朵热榜","fn":"loadGuduoRank","defaults":{"category":"剧集"},"keys":["category"],"rename":{}}],"MakkaPakka-ALL":[{"label":"🌸 动漫全境聚合","fn":"routeAnimeOmni","defaults":{"anime_source":"cal","cal_day":"today","bili_sort":"1","hot_cat":"anime","rank_cat":"anime","rank_year":"2026","rank_month":"all","rank_sort":"collects","daily_filter":"today","daily_weekday":"1","daily_sort":"popularity_rat_bgm","tmdb_sort":"trending","anilist_sort":"TRENDING_DESC","mal_sort":"airing"},"keys":["anime_source","cal_day","bili_sort","hot_cat","rank_cat","rank_year","rank_month","rank_sort","daily_filter","daily_weekday","daily_sort","tmdb_sort","anilist_sort","mal_sort","page","traktClientId"],"rename":{}},{"label":"🏷️ 全球影剧类别","fn":"MakkaPakka_ALL__loadGenreRank","defaults":{"sort_by":"all","genre":"all","region":"all","order_rule":"popularity"},"keys":["sort_by_1","genre","region","order_rule","page","traktClientId"],"rename":{"sort_by_1":"sort_by"}},{"label":"🎬 全能电影榜单","fn":"routeMovieOmni","defaults":{"movie_source":"general","general_sort":"popular","yearly_sort":"2024","genre_sort":"878"},"keys":["movie_source","general_sort","yearly_sort","genre_sort","page","traktClientId"],"rename":{}},{"label":"📺 全球综艺频道","fn":"loadVarietyShows","defaults":{"sort_by":"cn","list_type":"hot"},"keys":["sort_by_3","list_type","page","traktClientId"],"rename":{"sort_by_3":"sort_by"}},{"label":"🧭 影剧流行风向","fn":"routeTrendsHub","defaults":{"hub_source":"imdb","imdb_sort":"trending_week","mediaType":"all","rt_sort":"rt_movies_home","trakt_sort":"trending","traktType":"all","db_sort":"db_tv_cn"},"keys":["hub_source","imdb_sort","mediaType_4","rt_sort","trakt_sort","traktType","db_sort","page","traktClientId"],"rename":{"mediaType_4":"mediaType"}},{"label":"🔀 平台分流片库","fn":"MakkaPakka_ALL__loadPlatformMatrix","defaults":{"sort_by":"tv_drama","platform":"2007","sort":"popularity.desc"},"keys":["sort_by_5","platform_5","sort","page","traktClientId"],"rename":{"sort_by_5":"sort_by","platform_5":"platform"}},{"label":"🥇 流媒体TOP10","fn":"loadOfficialTop10","defaults":{"sort_by":"united-states","platform":"netflix","mediaType":"tv"},"keys":["sort_by_6","platform_6","mediaType_6","page","traktClientId"],"rename":{"sort_by_6":"sort_by","platform_6":"platform","mediaType_6":"mediaType"}}],"dongmanone":[{"label":"Bangumi 追番日历","fn":"dongmanone__loadBangumiCalendar","defaults":{"sort_by":"today"},"keys":["sort_by","page"],"rename":{}},{"label":"Bilibili 热榜","fn":"loadBilibiliRank","defaults":{"sort_by":"1"},"keys":["sort_by_1","page"],"rename":{"sort_by_1":"sort_by"}},{"label":"Bangumi 近期热门","fn":"fetchRecentHot","defaults":{"category":"anime"},"keys":["category_2","page"],"rename":{"category_2":"category"}},{"label":"Bangumi 年度/季度榜单","fn":"fetchAirtimeRanking","defaults":{"category":"anime","year":"2026","month":"all","sort":"collects"},"keys":["category_3","year","month","sort","page"],"rename":{"category_3":"category"}},{"label":"Bangumi 每日放送 (高级筛选)","fn":"fetchDailyCalendarApi","defaults":{"filterType":"today","specificWeekday":"1","dailySortOrder":"popularity_rat_bgm"},"keys":["filterType","specificWeekday","dailySortOrder"],"rename":{}},{"label":"TMDB 热门/新番","fn":"loadTmdbAnimeRanking","defaults":{"sort_by":"trending"},"keys":["sort_by_5","page"],"rename":{"sort_by_5":"sort_by"}},{"label":"AniList 流行榜","fn":"loadAniListRanking","defaults":{"sort_by":"TRENDING_DESC"},"keys":["sort_by_6","page"],"rename":{"sort_by_6":"sort_by"}},{"label":"MAL 权威榜单","fn":"loadMalRanking","defaults":{"sort_by":"airing"},"keys":["sort_by_7","page"],"rename":{"sort_by_7":"sort_by"}}],"imdb":[{"label":"🔥 影视榜单","fn":"loadImdbList","defaults":{"sort_by":"trending_week","mediaType":"all"},"keys":["sort_by","mediaType","page"],"rename":{}}],"letterboxd":[{"label":"Letterboxd片单","fn":"loadListItems","defaults":{"input_type":"select","actor_select":"https://letterboxd.com/actor/jackie-chan/","list_select":"https://letterboxd.com/jack/list/52-films-by-women-directors-in-2026/","sort_by":"default","genre":"default","decade":"default"},"keys":["input_type","actor_select","list_select","url_customize","sort_by","genre","decade","page"],"rename":{}}],"liumeiti":[{"label":"独家原创","fn":"liumeiti__loadPlatformOriginals","defaults":{"sort_by":"213","genre":"","sortBy":"popularity.desc"},"keys":["sort_by","genre","sortBy","page"],"rename":{}}],"liumeititime":[{"label":"独家原创 & 追更日历","fn":"liumeititime__loadPlatformOriginals","defaults":{"sort_by":"213","contentType":"tv","sortBy":"popularity.desc"},"keys":["sort_by","contentType","sortBy","page"],"rename":{}}],"mediahub":[{"label":"🔥 全球热榜聚合","fn":"mediahub__loadTrendHub","defaults":{"sort_by":"trakt_trending","traktType":"all"},"keys":["sort_by","traktType","page","traktClientId"],"rename":{}},{"label":"📺 平台分流片库","fn":"mediahub__loadPlatformMatrix","defaults":{"sort_by":"2007","category":"tv_drama","sort":"popularity.desc"},"keys":["sort_by_1","category","sort","page","traktClientId"],"rename":{"sort_by_1":"sort_by"}}],"mediahubrepair":[{"label":"🔥 全球热榜聚合","fn":"mediahubrepair__loadTrendHub","defaults":{"sort_by":"trakt_trending","traktType":"all"},"keys":["sort_by","traktType","page","traktClientId"],"rename":{}},{"label":"📺 平台分流片库","fn":"mediahubrepair__loadPlatformMatrix","defaults":{"sort_by":"2007","category":"tv_drama","sort":"popularity.desc"},"keys":["sort_by_1","category","sort","page","traktClientId"],"rename":{"sort_by_1":"sort_by"}}],"movielist":[{"label":"电影综合榜","fn":"loadGeneralMovies","defaults":{"sort_by":"popular"},"keys":["sort_by","page"],"rename":{}},{"label":"年度最佳电影","fn":"loadYearlyBestMovies","defaults":{"sort_by":"2024"},"keys":["sort_by_1","page"],"rename":{"sort_by_1":"sort_by"}},{"label":"按类型探索","fn":"loadGenreMovies","defaults":{"sort_by":"878"},"keys":["sort_by_2","page"],"rename":{"sort_by_2":"sort_by"}}],"redu":[{"label":"🎬 新片追踪","fn":"loadUpcoming","defaults":{"category":"movie_upcoming"},"keys":["category","page"],"rename":{}}],"today":[{"label":"今天看什么（完全随机推荐）","fn":"loadRecommendations","defaults":{"mediaType":"tv"},"keys":["mediaType","traktUser","traktClientId"],"rename":{}},{"label":"Trakt惊喜推荐（基于Trakt记录推荐）","fn":"loadRandomMix","defaults":{},"keys":["traktUser","traktClientId"],"rename":{}},{"label":"那年今日（历史上今天上映电影）","fn":"loadHistoryToday","defaults":{"sort_by":"Global","sortOrder":"time_desc"},"keys":["sort_by","sortOrder","traktUser","traktClientId"],"rename":{}}],"trakt":[{"label":"我的片单","fn":"trakt__loadTraktProfile","defaults":{"section":"updates","type":"all","updateSort":"future_first"},"keys":["section","type","updateSort","page","traktUser","traktClientId"],"rename":{}}],"traktkey":[{"label":"我的片单","fn":"traktkey__loadTraktProfile","defaults":{"section":"updates","type":"all","updateSort":"future_first"},"keys":["section","type","updateSort","page","traktUser"],"rename":{}}],"west":[{"label":"欧美风向标","fn":"loadWesternTrends","defaults":{"sort_by":"rt_movies_home","region":"united-states","mediaType":"tv"},"keys":["sort_by","region","mediaType","page"],"rename":{}}],"xilie":[{"label":"系列电影大满贯","fn":"loadFranchise","defaults":{"presetId":"custom","sortOrder":"asc"},"keys":["presetId","customQuery","sortOrder"],"rename":{}},{"label":"趣味流派探索","fn":"loadNicheGenre","defaults":{"sort_by":"12190","mediaType":"movie","sort":"popularity.desc"},"keys":["sort_by","mediaType","sort","page"],"rename":{}}],"ysbd":[{"label":"🟢 豆瓣","fn":"loadDoubanModule","defaults":{"sort_by":"tv_american"},"keys":["sort_by","page"],"rename":{}},{"label":"🗓 周更","fn":"loadCalendarModule","defaults":{"dateStr":"today","showType":"all"},"keys":["dateStr","showType","page"],"rename":{}},{"label":"🔵 TMDB","fn":"loadTMDBModule","defaults":{"sort_by":"movie","genre":"","year":"","sortBy":"popularity.desc"},"keys":["sort_by_2","genre","year","sortBy","page"],"rename":{"sort_by_2":"sort_by"}}],"zjrl":[{"label":"追剧日历 (Drama)","fn":"loadTvCalendar","defaults":{"mode":"update_today","sort_by":"Global"},"keys":["mode","sort_by","page"],"rename":{}},{"label":"综艺时刻 (Variety)","fn":"loadVarietyCalendar","defaults":{"mode":"today","sort_by":"cn"},"keys":["mode_1","sort_by_1","page"],"rename":{"mode_1":"mode","sort_by_1":"sort_by"}},{"label":"动漫周更 (Anime)","fn":"zjrl__loadBangumiCalendar","defaults":{"sort_by":"today"},"keys":["sort_by_2","page"],"rename":{"sort_by_2":"sort_by"}}],"zongyi":[{"label":"综艺聚合","fn":"loadVarietyUltimate","defaults":{"listType":"calendar","days":"14","region":"all"},"keys":["listType","days","region","page"],"rename":{}}]};
+const MAKKA_SUBS = {"ALLINONE":[{"label":"全网热播发现","fn":"loadPlatformList","defaults":{"sort_by":"netflix","mediaType":"tv","sortBy":"hot"},"keys":["sort_by","mediaType","sortBy","page"],"rename":{}}],"AutomatedList":[{"label":"豆瓣热榜","fn":"loadDouban","defaults":{"channel":"tv","sort_type":"default","language":"zh-CN"},"keys":["channel","sort_type","page","language"],"rename":{}},{"label":"豆瓣热榜-热评","fn":"loadDoubanComments","defaults":{"channel":"tv","sort_type":"default","language":"zh-CN"},"keys":["channel_1","sort_type","page","language"],"rename":{"channel_1":"channel"}},{"label":"各平台剧场","fn":"loadTheater","defaults":{"brand":"迷雾剧场","status":"all","sort_type":"default","language":"zh-CN"},"keys":["brand","status","sort_type","page","language"],"rename":{}},{"label":"热门番剧","fn":"loadBangumi","defaults":{"genre":"","sort_type":"default","language":"zh-CN"},"keys":["genre","sort_type","page","language"],"rename":{}},{"label":"芒果TV热榜","fn":"loadMangoTV","defaults":{"sort_by":"tv","sort_type":"default","language":"zh-CN"},"keys":["sort_by","sort_type","page","language"],"rename":{}},{"label":"流媒体 TOP 10","fn":"loadFlixPatrol","defaults":{"country":"united-states","platform":"netflix","chart":"all","language":"zh-CN"},"keys":["country","platform_5","chart_5","page","language"],"rename":{"platform_5":"platform","chart_5":"chart"}},{"label":"流媒体 TOP 10（排名）","fn":"loadFlixPatrolRanked","defaults":{"country":"united-states","platform":"netflix","chart":"tv","language":"zh-CN"},"keys":["country","platform_6","chart_6","language"],"rename":{"platform_6":"platform","chart_6":"chart"}},{"label":"爱优腾芒哔-看点","fn":"loadQqTeaserMerged","defaults":{"channel":"tv","tag":"all","sort":"heat","language":"zh-CN"},"keys":["channel_7","tag_7","sort_7","page","language"],"rename":{"channel_7":"channel","tag_7":"tag","sort_7":"sort"}},{"label":"骨朵热榜","fn":"loadGuduo","defaults":{"category":"剧集","language":"zh-CN"},"keys":["category_8","page","language"],"rename":{"category_8":"category"}},{"label":"动画疯人气榜","fn":"loadAniGamer","defaults":{"sort":"monthly","filter":"all","tag":"动作","category":"电影","target":"阖家观赏","language":"zh-CN"},"keys":["sort_9","filter","tag_9","category_9","target","page","language"],"rename":{"sort_9":"sort","tag_9":"tag","category_9":"category"}}],"Globalseries":[{"label":"🌍 全球探索发现","fn":"loadGlobalList","defaults":{"region":"CN","mediaType":"all","sort_by":"hot"},"keys":["region","mediaType","sort_by","page"],"rename":{}},{"label":"🏷️ 高级类型榜单","fn":"Globalseries__loadGenreRank","defaults":{"mediaType":"movie","genre":"scifi","region":"all","sort_by":"popularity"},"keys":["mediaType_1","genre","region_1","sort_by_1","page"],"rename":{"mediaType_1":"mediaType","region_1":"region","sort_by_1":"sort_by"}}],"Guduo-List":[{"label":"骨朵热榜","fn":"loadGuduoRank","defaults":{"category":"剧集"},"keys":["category"],"rename":{}}],"MakkaPakka-ALL":[{"label":"🌸 动漫全境聚合","fn":"routeAnimeOmni","defaults":{"anime_source":"cal","cal_day":"today","bili_sort":"1","hot_cat":"anime","rank_cat":"anime","rank_year":"2026","rank_month":"all","rank_sort":"collects","daily_filter":"today","daily_weekday":"1","daily_sort":"popularity_rat_bgm","tmdb_sort":"trending","anilist_sort":"TRENDING_DESC","mal_sort":"airing"},"keys":["anime_source","cal_day","bili_sort","hot_cat","rank_cat","rank_year","rank_month","rank_sort","daily_filter","daily_weekday","daily_sort","tmdb_sort","anilist_sort","mal_sort","page","traktClientId","language"],"rename":{}},{"label":"🏷️ 全球影剧类别","fn":"MakkaPakka_ALL__loadGenreRank","defaults":{"sort_by":"all","genre":"all","region":"all","order_rule":"popularity"},"keys":["sort_by_1","genre","region","order_rule","page","traktClientId","language"],"rename":{"sort_by_1":"sort_by"}},{"label":"🎬 全能电影榜单","fn":"routeMovieOmni","defaults":{"movie_source":"general","general_sort":"popular","yearly_sort":"2024","genre_sort":"878"},"keys":["movie_source","general_sort","yearly_sort","genre_sort","page","traktClientId","language"],"rename":{}},{"label":"📺 全球综艺频道","fn":"loadVarietyShows","defaults":{"sort_by":"cn","list_type":"hot"},"keys":["sort_by_3","list_type","page","traktClientId","language"],"rename":{"sort_by_3":"sort_by"}},{"label":"🧭 影剧流行风向","fn":"routeTrendsHub","defaults":{"hub_source":"imdb","imdb_sort":"trending_week","mediaType":"all","rt_sort":"rt_movies_home","trakt_sort":"trending","traktType":"all","db_sort":"db_tv_cn"},"keys":["hub_source","imdb_sort","mediaType_4","rt_sort","trakt_sort","traktType","db_sort","page","traktClientId","language"],"rename":{"mediaType_4":"mediaType"}},{"label":"🔀 平台分流片库","fn":"MakkaPakka_ALL__loadPlatformMatrix","defaults":{"sort_by":"tv_drama","platform":"2007","sort":"popularity.desc"},"keys":["sort_by_5","platform_5","sort","page","traktClientId","language"],"rename":{"sort_by_5":"sort_by","platform_5":"platform"}},{"label":"🥇 流媒体TOP10","fn":"loadOfficialTop10","defaults":{"sort_by":"united-states","platform":"netflix","mediaType":"tv"},"keys":["sort_by_6","platform_6","mediaType_6","page","traktClientId","language"],"rename":{"sort_by_6":"sort_by","platform_6":"platform","mediaType_6":"mediaType"}}],"dongmanone":[{"label":"Bangumi 追番日历","fn":"dongmanone__loadBangumiCalendar","defaults":{"sort_by":"today"},"keys":["sort_by","page"],"rename":{}},{"label":"Bilibili 热榜","fn":"loadBilibiliRank","defaults":{"sort_by":"1"},"keys":["sort_by_1","page"],"rename":{"sort_by_1":"sort_by"}},{"label":"Bangumi 近期热门","fn":"fetchRecentHot","defaults":{"category":"anime"},"keys":["category_2","page"],"rename":{"category_2":"category"}},{"label":"Bangumi 年度/季度榜单","fn":"fetchAirtimeRanking","defaults":{"category":"anime","year":"2026","month":"all","sort":"collects"},"keys":["category_3","year","month","sort","page"],"rename":{"category_3":"category"}},{"label":"Bangumi 每日放送 (高级筛选)","fn":"fetchDailyCalendarApi","defaults":{"filterType":"today","specificWeekday":"1","dailySortOrder":"popularity_rat_bgm"},"keys":["filterType","specificWeekday","dailySortOrder"],"rename":{}},{"label":"TMDB 热门/新番","fn":"loadTmdbAnimeRanking","defaults":{"sort_by":"trending"},"keys":["sort_by_5","page"],"rename":{"sort_by_5":"sort_by"}},{"label":"AniList 流行榜","fn":"loadAniListRanking","defaults":{"sort_by":"TRENDING_DESC"},"keys":["sort_by_6","page"],"rename":{"sort_by_6":"sort_by"}},{"label":"MAL 权威榜单","fn":"loadMalRanking","defaults":{"sort_by":"airing"},"keys":["sort_by_7","page"],"rename":{"sort_by_7":"sort_by"}}],"imdb":[{"label":"🔥 影视榜单","fn":"loadImdbList","defaults":{"sort_by":"trending_week","mediaType":"all"},"keys":["sort_by","mediaType","page"],"rename":{}}],"letterboxd":[{"label":"Letterboxd片单","fn":"loadListItems","defaults":{"input_type":"select","actor_select":"https://letterboxd.com/actor/jackie-chan/","list_select":"https://letterboxd.com/jack/list/52-films-by-women-directors-in-2026/","sort_by":"default","genre":"default","decade":"default"},"keys":["input_type","actor_select","list_select","url_customize","sort_by","genre","decade","page"],"rename":{}}],"liumeiti":[{"label":"独家原创","fn":"liumeiti__loadPlatformOriginals","defaults":{"sort_by":"213","genre":"","sortBy":"popularity.desc"},"keys":["sort_by","genre","sortBy","page"],"rename":{}}],"liumeititime":[{"label":"独家原创 & 追更日历","fn":"liumeititime__loadPlatformOriginals","defaults":{"sort_by":"213","contentType":"tv","sortBy":"popularity.desc"},"keys":["sort_by","contentType","sortBy","page"],"rename":{}}],"mediahub":[{"label":"🔥 全球热榜聚合","fn":"mediahub__loadTrendHub","defaults":{"sort_by":"trakt_trending","traktType":"all"},"keys":["sort_by","traktType","page","traktClientId"],"rename":{}},{"label":"📺 平台分流片库","fn":"mediahub__loadPlatformMatrix","defaults":{"sort_by":"2007","category":"tv_drama","sort":"popularity.desc"},"keys":["sort_by_1","category","sort","page","traktClientId"],"rename":{"sort_by_1":"sort_by"}}],"mediahubrepair":[{"label":"🔥 全球热榜聚合","fn":"mediahubrepair__loadTrendHub","defaults":{"sort_by":"trakt_trending","traktType":"all"},"keys":["sort_by","traktType","page","traktClientId"],"rename":{}},{"label":"📺 平台分流片库","fn":"mediahubrepair__loadPlatformMatrix","defaults":{"sort_by":"2007","category":"tv_drama","sort":"popularity.desc"},"keys":["sort_by_1","category","sort","page","traktClientId"],"rename":{"sort_by_1":"sort_by"}}],"movielist":[{"label":"电影综合榜","fn":"loadGeneralMovies","defaults":{"sort_by":"popular"},"keys":["sort_by","page"],"rename":{}},{"label":"年度最佳电影","fn":"loadYearlyBestMovies","defaults":{"sort_by":"2024"},"keys":["sort_by_1","page"],"rename":{"sort_by_1":"sort_by"}},{"label":"按类型探索","fn":"loadGenreMovies","defaults":{"sort_by":"878"},"keys":["sort_by_2","page"],"rename":{"sort_by_2":"sort_by"}}],"redu":[{"label":"🎬 新片追踪","fn":"loadUpcoming","defaults":{"category":"movie_upcoming"},"keys":["category","page"],"rename":{}}],"today":[{"label":"今天看什么（完全随机推荐）","fn":"loadRecommendations","defaults":{"mediaType":"tv"},"keys":["mediaType","traktUser","traktClientId"],"rename":{}},{"label":"Trakt惊喜推荐（基于Trakt记录推荐）","fn":"loadRandomMix","defaults":{},"keys":["traktUser","traktClientId"],"rename":{}},{"label":"那年今日（历史上今天上映电影）","fn":"loadHistoryToday","defaults":{"sort_by":"Global","sortOrder":"time_desc"},"keys":["sort_by","sortOrder","traktUser","traktClientId"],"rename":{}}],"trakt":[{"label":"我的片单","fn":"trakt__loadTraktProfile","defaults":{"section":"updates","type":"all","updateSort":"future_first"},"keys":["section","type","updateSort","page","traktUser","traktClientId"],"rename":{}}],"traktkey":[{"label":"我的片单","fn":"traktkey__loadTraktProfile","defaults":{"section":"updates","type":"all","updateSort":"future_first"},"keys":["section","type","updateSort","page","traktUser"],"rename":{}}],"west":[{"label":"欧美风向标","fn":"loadWesternTrends","defaults":{"sort_by":"rt_movies_home","region":"united-states","mediaType":"tv"},"keys":["sort_by","region","mediaType","page"],"rename":{}}],"xilie":[{"label":"系列电影大满贯","fn":"loadFranchise","defaults":{"presetId":"custom","sortOrder":"asc"},"keys":["presetId","customQuery","sortOrder"],"rename":{}},{"label":"趣味流派探索","fn":"loadNicheGenre","defaults":{"sort_by":"12190","mediaType":"movie","sort":"popularity.desc"},"keys":["sort_by","mediaType","sort","page"],"rename":{}}],"ysbd":[{"label":"🟢 豆瓣","fn":"loadDoubanModule","defaults":{"sort_by":"tv_american"},"keys":["sort_by","page"],"rename":{}},{"label":"🗓 周更","fn":"loadCalendarModule","defaults":{"dateStr":"today","showType":"all"},"keys":["dateStr","showType","page"],"rename":{}},{"label":"🔵 TMDB","fn":"loadTMDBModule","defaults":{"sort_by":"movie","genre":"","year":"","sortBy":"popularity.desc"},"keys":["sort_by_2","genre","year","sortBy","page"],"rename":{"sort_by_2":"sort_by"}}],"zjrl":[{"label":"追剧日历 (Drama)","fn":"loadTvCalendar","defaults":{"mode":"update_today","sort_by":"Global"},"keys":["mode","sort_by","page"],"rename":{}},{"label":"综艺时刻 (Variety)","fn":"loadVarietyCalendar","defaults":{"mode":"today","sort_by":"cn"},"keys":["mode_1","sort_by_1","page"],"rename":{"mode_1":"mode","sort_by_1":"sort_by"}},{"label":"动漫周更 (Anime)","fn":"zjrl__loadBangumiCalendar","defaults":{"sort_by":"today"},"keys":["sort_by_2","page"],"rename":{"sort_by_2":"sort_by"}}],"zongyi":[{"label":"综艺聚合","fn":"loadVarietyUltimate","defaults":{"listType":"calendar","days":"14","region":"all"},"keys":["listType","days","region","page"],"rename":{}}]};
 
 /* ---- 统一调度器们 ---- */
 
@@ -7367,7 +8025,7 @@ globalThis.loadPlatformList = loadPlatformList;
 ;(function(){
 /**
  * 玛卡巴卡云端剧场 Forward Widget
- * 聚合豆瓣榜单、精选剧场、热门番剧与芒果TV推荐 (极速本地全局排序版)
+ * 聚合骨朵、豆瓣、精选剧场、热门番剧、芒果TV、FlixPatrol 与动画疯榜单
  */
 
 
@@ -7431,6 +8089,19 @@ const Utils = {
     const p = parseInt(pageNum) || 1;
     const start = (p - 1) * pageSize;
     return list.slice(start, start + pageSize);
+  },
+
+  toVideoItem(item) {
+    if (!item || item.type === "text") return item;
+    const id = Number(item.tmdbId || item.id);
+    if (!Number.isFinite(id) || id <= 0) return null;
+    const mediaType = item.mediaType || "tv";
+    if (!["movie", "tv"].includes(mediaType)) return null;
+    return { id: `${mediaType}.${id}`, type: "tmdb" };
+  },
+
+  toVideoItems(list) {
+    return (list || []).map(item => this.toVideoItem(item)).filter(Boolean);
   }
 };
 
@@ -7440,10 +8111,79 @@ const Utils = {
 async function loadDouban(params = {}) {
   const data = await Utils.fetch("douban-hot.json");
   if (data === Utils.emptyTips) return data;
-  
+
   let list = data?.[params.channel] || [];
   list = Utils.sortList(list, params.sort_type); // 直接同步调用，不再 await
-  return Utils.paginate(list, params.page);
+  return Utils.toVideoItems(Utils.paginate(list, params.page));
+}
+
+/**
+ * 模块 1B：豆瓣热榜-热评
+ * 榜单与「豆瓣热榜」完全一致；仅把 description 换成该条目的豆瓣热评。
+ * 没有热评的条目保留原始简介，不影响任何历史榜单。
+ */
+async function loadDoubanComments(params = {}) {
+  const data = await Utils.fetch("douban-hot.json");
+  if (data === Utils.emptyTips) return data;
+
+  let list = data?.[params.channel] || [];
+  list = Utils.sortList(list, params.sort_type);
+  const comments = data?.comments || {};
+  // tmdb 类型会被宿主用官方简介覆盖 description；这里改用 url 类型自带字段，
+  // 热评才能原样进入卡片，同时保留原始 tmdb ID 供详情页还原。
+  return (Utils.paginate(list, params.page) || []).map(raw => {
+    if (!raw || raw.type === "text") return raw;
+    const mediaType = raw.mediaType || "tv";
+    const tmdbId = Number(raw.tmdbId || raw.id);
+    if (!Number.isFinite(tmdbId) || tmdbId <= 0) return null;
+    if (!["movie", "tv"].includes(mediaType)) return null;
+    const key = `${mediaType}.${tmdbId}`;
+    const comment = comments[key];
+    // 热评末尾带上豆瓣作者，卡片按“—— 昵称”显示；无作者时只放正文。
+    const review = comment && comment.text
+      ? comment.text + (comment.author ? ` —— ${comment.author}` : "")
+      : "";
+    return {
+      id: `tmdb:${mediaType}:${tmdbId}`,
+      type: "url",
+      link: `tmdb:${mediaType}:${tmdbId}`,
+      title: raw.title,
+      description: review || raw.description || "", posterUrl: raw.posterPath, backdropUrl: raw.backdropPath,
+      rating: raw.rating,
+      mediaType,
+      genreTitle: raw.genreTitle,
+      releaseDate: raw.releaseDate
+    };
+  }).filter(Boolean);
+}
+
+/**
+ * 热评条目的详情：还原成 tmdb 条目，交回 Rex 原生详情页。
+ */
+async function loadDetail(link) {
+  const match = /^tmdb:(movie|tv):(\d+)$/.exec(String(link || ""));
+  if (!match) return null;
+  const mediaType = match[1], tmdbId = match[2];
+  const key = `${mediaType}.${tmdbId}`;
+  const data = await Utils.fetch("douban-hot.json");
+  if (data === Utils.emptyTips) return null;
+  for (const channel of Object.keys(data)) {
+    const list = data[channel];
+    if (!Array.isArray(list)) continue;
+    const raw = list.find(entry => `${entry.mediaType || "tv"}.${Number(entry.tmdbId || entry.id)}` === key);
+    if (!raw) continue;
+    return {
+      id: tmdbId,
+      type: "tmdb",
+      title: raw.title,
+      description: raw.description, posterUrl: raw.posterPath, backdropUrl: raw.backdropPath,
+      rating: raw.rating,
+      mediaType,
+      genreTitle: raw.genreTitle,
+      releaseDate: raw.releaseDate
+    };
+  }
+  return { id: tmdbId, type: "tmdb", mediaType };
 }
 
 /**
@@ -7452,13 +8192,13 @@ async function loadDouban(params = {}) {
 async function loadTheater(params = {}) {
   const data = await Utils.fetch("theater-data.json");
   if (data === Utils.emptyTips) return data;
-  
+
   const brand = params.brand || "迷雾剧场";
   const status = params.status || "all";
-  
+
   const brandData = data[brand];
   if (!brandData) return [];
-  
+
   let list = [];
   if (status === "aired") {
     list = brandData.aired || [];
@@ -7467,9 +8207,9 @@ async function loadTheater(params = {}) {
   } else {
     list = [...(brandData.upcoming || []), ...(brandData.aired || [])];
   }
-  
+
   list = Utils.sortList(list, params.sort_type); // 同步调用
-  return Utils.paginate(list, params.page);
+  return Utils.toVideoItems(Utils.paginate(list, params.page));
 }
 
 /**
@@ -7478,16 +8218,17 @@ async function loadTheater(params = {}) {
 async function loadBangumi(params = {}) {
   const data = await Utils.fetch("bangumi-hot.json");
   if (data === Utils.emptyTips) return data;
-  
+
   let list = data?.hot_anime || data?.items || [];
 
   if (params.genre && params.genre !== "") {
-    const genreId = parseInt(params.genre);
-    list = list.filter(item => item.rawGenres && item.rawGenres.includes(genreId));
+    const genreNames = { "28": "动作", "12": "冒险", "16": "动画", "35": "喜剧", "14": "奇幻", "18": "剧情", "878": "科幻", "9648": "悬疑" };
+    const genreName = genreNames[params.genre];
+    list = list.filter(item => genreName && String(item.genreTitle || "").includes(genreName));
   }
-  
+
   list = Utils.sortList(list, params.sort_type); // 同步调用
-  return Utils.paginate(list, params.page);
+  return Utils.toVideoItems(Utils.paginate(list, params.page));
 }
 
 /**
@@ -7496,17 +8237,405 @@ async function loadBangumi(params = {}) {
 async function loadMangoTV(params = {}) {
   const data = await Utils.fetch("mgtv-hot.json");
   if (data === Utils.emptyTips) return data;
-  
+
   const sort_by = params.sort_by || "tv";
   let list = data?.[sort_by] || [];
 
   list = Utils.sortList(list, params.sort_type); // 同步调用
-  return Utils.paginate(list, params.page);
+  return Utils.toVideoItems(Utils.paginate(list, params.page));
+}
+
+/**
+ * 模块 5：加载骨朵热榜
+ */
+async function loadGuduo(params = {}) {
+  const data = await Utils.fetch("guduo-hot.json");
+  if (data === Utils.emptyTips) return data;
+  const list = data?.categories?.[params.category || "剧集"] || [];
+  return Utils.toVideoItems(Utils.paginate(list, params.page));
+}
+
+/**
+ * 模块 7：加载动画疯人气榜
+ */
+async function loadAniGamer(params = {}) {
+  try {
+    const data = await Utils.fetch("anigamer-hot.json");
+    if (data === Utils.emptyTips || !data?.lists) throw new Error("动画疯榜单 JSON 格式不正确");
+    const sort = params.sort === "yearly" ? "yearly" : "monthly";
+    const filter = ["tags", "categories", "targets"].includes(params.filter) ? params.filter : "all";
+    const values = { tags: ["动作", "冒险", "奇幻", "异世界", "科幻", "校园", "喜剧", "恋爱", "悬疑", "运动", "特摄", "BL", "GL"], categories: ["电影", "OVA", "双语", "泡面番", "真人演出"], targets: ["阖家观赏", "付费会员", "年龄限制"] };
+    const selectedValue = filter === "tags" ? params.tag : filter === "categories" ? params.category : params.target;
+    const pageLimit = sort === "monthly" && filter !== "all" ? 3 : 5;
+    const page = String(Math.min(pageLimit, Math.max(1, Number(params.page) || 1)));
+    const list = sort === "monthly" && filter !== "all" && values[filter].includes(selectedValue)
+      ? data.filters?.monthly?.[filter]?.[selectedValue]?.[page] || []
+      : data.lists[sort]?.[page] || [];
+    return Utils.toVideoItems(list);
+  } catch (error) {
+    let reason = error.message || String(error);
+    const status = await Utils.fetch("anigamer-status.json");
+    if (status !== Utils.emptyTips && status?.ok === false && status.reason) reason = status.reason;
+    console.error("[loadAniGamer] 失败:", reason);
+    throw new Error(`动画疯榜单更新失败：${reason}`);
+  }
+}
+
+/**
+ * 模块 6：加载 FlixPatrol 全球流媒体榜
+ */
+async function loadFlixPatrol(params = {}) {
+  const allowedCountries = ["world", "united-states", "taiwan", "hong-kong", "singapore", "south-korea", "japan"];
+  const country = allowedCountries.includes(params.country) ? params.country : "united-states";
+  const data = await Utils.fetch(`flixpatrol/${country}.json`);
+  if (data === Utils.emptyTips || !data?.platforms) return data === Utils.emptyTips ? data : [];
+
+  const chart = ["all", "movies", "tv", "overall", "kids_movies", "kids_tv"].includes(params.chart) ? params.chart : "all";
+  const collect = platform => {
+    const charts = platform?.charts || {};
+    return chart === "all" ? [...(charts.movies || []), ...(charts.tv || [])] : (charts[chart] || []);
+  };
+  let list = [];
+  if (params.platform === "all") {
+    for (const platform of Object.values(data.platforms)) list.push(...collect(platform));
+  } else {
+    const platform = data.platforms[params.platform || "netflix"];
+    if (!platform) return [];
+    list = collect(platform);
+  }
+
+  const unique = [];
+  const seen = new Set();
+  for (const item of list) {
+    const key = `${item.mediaType || "tv"}:${item.tmdbId || item.id || item.title}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+  }
+  return Utils.toVideoItems(Utils.paginate(unique, params.page, 24));
+}
+
+/**
+ * 模块 8：FlixPatrol 排名版，把真实名次写进条目文字字段，供排名卡片读取。
+ * 原「流媒体 TOP 10」入口保持不变。
+ */
+async function loadFlixPatrolRanked(params = {}) {
+  try {
+    const allowedCountries = ["world", "united-states", "taiwan", "hong-kong", "singapore", "south-korea", "japan"];
+    const country = allowedCountries.includes(params.country) ? params.country : "united-states";
+    const data = await Utils.fetch(`flixpatrol/${country}.json`);
+    if (data === Utils.emptyTips) return data;
+    if (!data?.platforms) throw new Error("FlixPatrol JSON 格式不正确");
+
+    const allowedCharts = ["tv", "movies", "kids_tv", "kids_movies"];
+    const chart = allowedCharts.includes(params.chart) ? params.chart : "tv";
+    const platform = data.platforms[params.platform || "netflix"];
+    if (!platform) return [];
+    const list = (platform.charts?.[chart] || []).filter(item => Number(item.rank) > 0);
+    if (!list.length) return [];
+
+    const items = [];
+    for (const raw of list.slice(0, 10)) {
+      const tmdbId = Number(raw.tmdbId || raw.id);
+      const mediaType = raw.mediaType === "movie" ? "movie" : "tv";
+      if (!Number.isFinite(tmdbId) || tmdbId <= 0) continue;
+      const link = `tmdb:${mediaType}:${tmdbId}`;
+      items.push({
+        id: link,
+        link,
+        type: "url",
+        mediaType,
+        title: raw.tmdbTitle || raw.title || "", posterUrl: raw.posterPath || "", backdropUrl: raw.backdropPath || "",
+        releaseDate: raw.releaseDate || "",
+        rating: raw.rating,
+        description: String(raw.rank)
+      });
+    }
+    return items;
+  } catch (error) {
+    console.error("[loadFlixPatrolRanked] 失败:", error.message || error);
+    throw error;
+  }
+}
+
+/**
+ * 模块 9：爱优腾芒哔看点。爱优腾哔由 List 预抓并匹配，哔哩哔哩仅动漫国创，芒果现场抓取。
+ * 原始条目先去重、合并标签，再筛选排序和分页，最后投影成卡片。
+ */
+function teaserTags(entry) {
+  const tags = entry.tags || [];
+  return Array.isArray(tags) ? tags : [];
+}
+
+const TEASER_LOW_AGE_TITLE = /(?:宝宝巴士|贝乐虎|儿歌|睡前故事|学龄前|亲子|早教|低幼|幼儿|启蒙|识字|红小豆|开心锤锤|叶罗丽|熊出没|喜羊羊|京剧猫|熊猫和小鼹鼠|不白吃|哆啦A梦|蜡笔小新|海绵宝宝|小猪佩奇|汪汪队|超级飞侠|巴啦啦小魔仙|大神探诸葛九九|诸葛九九|U探泰拉)/;
+const TEASER_LIVE_ACTION_TITLE = /(?:大周第一婿|真假千金)/;
+// 旧缓存没有 originCountry 时，先用已知非国产作品兜底；新抓取数据会走 TMDB 原产地字段。
+const TEASER_NON_CN_TITLE = /(?:灌篮高手|鬼灭之刃|名侦探柯南|龙珠|奥特曼|神奇数字马戏团|海贼王|火影忍者|咒术回战|进击的巨人|间谍过家家|排球少年|黑子的篮球|数码宝贝|宝可梦|宠物小精灵)/;
+
+function teaserIsLowAge(entry) {
+  if (!entry) return false;
+  const title = String(entry.displayTitle || entry.title || "");
+  if (TEASER_LOW_AGE_TITLE.test(title)) return true;
+  return teaserTags(entry).some(tag => /儿童|Kids|少儿/i.test(String(tag)));
+}
+
+function teaserTmdbIsAnime(entry) {
+  const ids = entry && (entry.genreIds || entry.genre_ids) || [];
+  return Array.isArray(ids) && ids.some(id => Number(id) === 16);
+}
+
+function teaserIsForeign(entry) {
+  const regions = (entry && (entry.originCountry || entry.origin_country) || [])
+    .map(code => String(code || "").trim()).filter(Boolean);
+  if (regions.length && !regions.some(code => ["CN", "HK", "MO", "TW"].includes(code))) return true;
+  return TEASER_NON_CN_TITLE.test(String(entry && (entry.displayTitle || entry.title) || ""));
+}
+
+function teaserMatches(entry, filter) {
+  if (!filter || filter === "all") return true;
+  const tags = teaserTags(entry);
+  if (tags.includes(filter)) return true;
+  return filter === entry.genre;
+}
+
+function teaserSort(list, sort) {
+  const copy = list.slice();
+  if (sort === "updated") {
+    // 与豆瓣热榜「最近更新」同款：用 TMDB 的 lastUpdateDate（剧集为 last_air_date）。
+    return copy.sort((a, b) => String(b.lastUpdateDate || b.releaseDate || "").localeCompare(String(a.lastUpdateDate || a.releaseDate || "")));
+  }
+  if (sort === "new") {
+    return copy.sort((a, b) => String(b.releaseDate || "").localeCompare(String(a.releaseDate || "")));
+  }
+  if (sort === "rating") {
+    return copy.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0));
+  }
+  if (sort === "heat") {
+    return copy.sort((a, b) => (Number(b.popularity) || 0) - (Number(a.popularity) || 0));
+  }
+  return copy;
+}
+
+async function loadQqTeaser(params = {}) {
+  // 已导入的旧首页包仍绑定这个名称，使用同一个聚合入口。
+  return loadQqTeaserMerged(params);
+}
+
+function teaserPriority(entry) {
+  return (String(entry.teaser || "").trim() ? 5 : 0) + ({ qq: 4, iq: 3, bili: 2, yk: 1 }[entry.source] || 0);
+}
+
+function teaserDedupe(entries) {
+  const seen = new Map();
+  for (const entry of entries) {
+    const id = Number(entry.tmdbId);
+    if (!Number.isFinite(id) || id <= 0 || !(entry.posterPath || entry.backdropPath)) continue;
+    const key = (entry.mediaType === "movie" ? "movie" : "tv") + "." + id;
+    const current = seen.get(key);
+    if (!current) { seen.set(key, entry); continue; }
+    const primary = teaserPriority(entry) > teaserPriority(current) ? entry : current;
+    const extra = primary === entry ? current : entry;
+    const merged = Object.assign({}, primary);
+    for (const field of Object.keys(extra)) {
+      if (merged[field] == null || merged[field] === "" || (Array.isArray(merged[field]) && !merged[field].length)) merged[field] = extra[field];
+    }
+    merged.tags = Array.from(new Set(teaserTags(primary).concat(teaserTags(extra))));
+    merged.alsoOn = Array.from(new Set((primary.alsoOn || []).concat(extra.alsoOn || [], [primary.source, extra.source]).filter(Boolean))).sort();
+    merged.lastUpdateDate = [primary.lastUpdateDate || "", extra.lastUpdateDate || ""].sort().pop();
+    seen.set(key, merged);
+  }
+  return Array.from(seen.values());
+}
+
+/* ---------------------------------------------------------------- 芒果TV 现场抓取
+   芒果片库列表按地区返回不同内容，GitHub Actions 的海外 IP 看不到国内新剧，
+   所以芒果不走 List 仓库，改在用户设备上现场抓（用户网络在国内，列表完整）。 */
+
+var MG_API = "https://pianku.api.mgtv.com/rider/list/pcweb/v3";
+var MG_CHANNELS = { tv: 2, movie: 3, variety: 1, anime: 50 };
+
+function mgTitleClean(value) {
+  return String(value || "")
+    .replace(/普通话版?|国语版?|粤语版?|日语版?|中配版?|原声版?|未删减版?|修复版?|重映版?|英语版?|台配版?|港配版?/g, "")
+    .replace(/第\s*[0-9一二三四五六七八九十百]+\s*[季期部篇]/g, "")
+    .replace(/年番|完结季|完结篇|特别篇|加更篇|衍生篇|番外篇|总篇|精华篇|爽看版|精编版|加更版|会员版|悠享版|抢先版|完整版|导演剪辑版|速看版|高能版|纯享版|竖屏版|横屏版|特辑|大结局|升级版|重逢版/g, "")
+    .replace(/[（(][^)）]*[)）]|\[[^\]]*\]|【[^】]*】/g, "")
+    .replace(/[\s·・]*(?:更新|更新中)$/, "").replace(/[\s·・]+$/, "").trim();
+}
+
+async function mgFetchList(channelKey) {
+  const channelId = MG_CHANNELS[channelKey];
+  if (!channelId) return [];
+  const res = await Widget.http.get(MG_API + "?allowedRC=1&platform=pcweb&channelId=" + channelId +
+    "&pn=1&pc=30&hudong=1&_support=10000000&sort=c1", {
+    headers: { "Referer": "https://www.mgtv.com/lib/" + channelId, "accept": "application/json" }
+  });
+  const body = res && res.data !== undefined ? res.data : res;
+  if (typeof body === "string") { try { return JSON.parse(body).data.hitDocs || []; } catch (e) { return []; } }
+  return (body && body.data && body.data.hitDocs) || [];
+}
+
+function mgPickTeaser(doc, channelKey) {
+  const subtitle = String(doc.subtitle || "").trim();
+  // 综艺/动漫的 subtitle 是原生短看点；电视剧/电影是演员名单，改截 story。
+  if ((channelKey === "variety" || channelKey === "anime") && subtitle &&
+      subtitle.indexOf(",") < 0 && subtitle.indexOf("，") < 0 && subtitle.length <= 20) {
+    return subtitle;
+  }
+  const story = String(doc.story || "").trim();
+  if (!story) return "";
+  const clauses = story.split(/[，；。！？]/).map(s => s.trim()).filter(s => s.length >= 4);
+  const full = clauses.filter(s => s.length <= 16);
+  if (full.length) {
+    let best = full.reduce((a, b) => b.length > a.length ? b : a);
+    if (best.length < 10) {
+      for (const part of clauses.slice(1)) {
+        const joined = clauses[0] + "，" + part;
+        if (joined.length <= 16) { best = joined; break; }
+      }
+    }
+    return best + "。";
+  }
+  if (clauses.length) return clauses.reduce((a, b) => b.length < a.length ? b : a).slice(0, 15) + "…";
+  return story.slice(0, 15) + "…";
+}
+
+async function mgMatch(entry, kind, requireChina = false) {
+  const names = [mgTitleClean(entry.title)];
+  for (const name of names) {
+    try {
+      const res = await Widget.tmdb.get("search/" + kind, { params: { query: name, language: "zh-CN", include_adult: "false" } });
+      const year = String(entry.year || "");
+      let best = null, bestScore = 0;
+      for (const result of (res && res.results) || []) {
+        if (!result || !result.id) continue;
+        // 榜单只统计国产剧；黑沙这类重名会撞上海外剧（冰岛 Black Sands）。
+        const regions = result.origin_country || [];
+        if (requireChina && regions.length && !regions.some(r => ["CN", "HK", "MO", "TW"].includes(r))) continue;
+        const titles = [result.name, result.title, result.original_name, result.original_title].filter(Boolean);
+        let score = 0;
+        for (const t of titles) {
+          const a = name.replace(/[^\w\u4e00-\u9fa5]+/g, ""), b = t.replace(/[^\w\u4e00-\u9fa5]+/g, "");
+          if (!a || !b) continue;
+          const grams = s => { const o = new Set(); for (let i = 0; i < s.length - 1; i++) o.add(s.slice(i, i + 2)); if (s.length === 1) o.add(s); return o; };
+          const ga = grams(a), gb = grams(b);
+          let shared = 0; for (const g of ga) if (gb.has(g)) shared++;
+          if (ga.size && gb.size) score = Math.max(score, shared / (ga.size + gb.size - shared));
+        }
+        const date = String(result.first_air_date || result.release_date || "");
+        if (year && date.slice(0, 4) === year) score += 0.5;
+        score += Math.min(0.2, (result.popularity || 0) / 5000);
+        if (score > bestScore) { bestScore = score; best = result; }
+      }
+      if (!best || bestScore < 0.72) continue;
+      let origin = Array.isArray(best.origin_country) ? best.origin_country : [];
+      if (requireChina && !origin.length) {
+        try {
+          const detail = await Widget.tmdb.get(kind + "/" + best.id, { params: { language: "zh-CN" } });
+          origin = Array.isArray(detail.origin_country) ? detail.origin_country : [];
+        } catch (detailError) {
+          console.warn("[mgLive] TMDB detail failed:", detailError.message || detailError);
+        }
+      }
+      if (requireChina && origin.length && !origin.some(r => ["CN", "HK", "MO", "TW"].includes(r))) continue;
+      const poster = best.poster_path || "", backdrop = best.backdrop_path || "";
+      if (!poster && !backdrop) continue;
+      return {
+        tmdbId: best.id, mediaType: kind, posterUrl: poster, backdropUrl: backdrop,
+        genreIds: Array.isArray(best.genre_ids) ? best.genre_ids : [],
+        originCountry: origin,
+        releaseDate: String(best.first_air_date || best.release_date || ""),
+        lastUpdateDate: entry.lastUpdateDate || String(best.first_air_date || best.release_date || ""),
+        rating: best.vote_average || 0,
+        popularity: best.popularity || 0,
+      };
+    } catch (error) {
+      console.warn("[mgLive] TMDB search failed:", error.message || error);
+    }
+  }
+  return null;
+}
+
+async function mgLiveEntries(channelKey) {
+  const docs = await mgFetchList(channelKey);
+  const kind = channelKey === "movie" ? "movie" : "tv";
+  const entries = [];
+  for (const doc of docs) {
+    const title = mgTitleClean(doc.title);
+    const cid = "mg" + String(doc.clipId || "");
+    if (!title || entries.some(e => e.cid === cid)) continue;
+    if (channelKey === "anime" && teaserIsLowAge({ title })) continue;
+    entries.push({
+      source: "mgtv", cid,
+      title,
+      teaser: mgPickTeaser(doc, channelKey),
+      year: String(doc.year || ""),
+      episodeText: String(doc.updateInfo || ""),
+      lastUpdateDate: String(doc.se_updateTime || "").slice(0, 10),
+      tags: String(doc.kind || "").split(/[,，、/|]/).map(s => s.trim()).filter(Boolean),
+    });
+  }
+  const out = [];
+  for (const entry of entries) {
+    const hit = await mgMatch(entry, kind, channelKey === "anime");
+    if (!hit) continue;
+    if (channelKey === "anime") {
+      const ids = (hit.genreIds || []).map(Number);
+      if (!teaserTmdbIsAnime(hit) || ids.includes(10762) || teaserIsLowAge(Object.assign({}, entry, hit))) continue;
+    }
+    out.push(Object.assign({}, entry, hit));
+  }
+  return out;
+}
+
+async function loadQqTeaserMerged(params = {}) {
+  try {
+    const data = await Utils.fetch("qq-teaser.json");
+    const allowed = ["tv", "movie", "variety", "anime"];
+    const channel = allowed.includes(params.channel) ? params.channel : "tv";
+    const base = data === Utils.emptyTips ? [] : (data.channels || {})[channel] || [];
+    let mg = [];
+    try {
+      mg = await mgLiveEntries(channel);
+    } catch (error) {
+      console.error("[mgLive] 失败:", error.message || error);
+    }
+    if (data === Utils.emptyTips && !mg.length) return data;
+    let merged = teaserDedupe(base.concat(mg));
+    if (channel === "anime") merged = merged.filter(entry => !teaserIsLowAge(entry)
+      && !teaserIsForeign(entry)
+      && !TEASER_LIVE_ACTION_TITLE.test(String(entry.displayTitle || entry.title || "")));
+    const filter = params.tag && params.tag !== "all" ? String(params.tag) : "";
+    const sort = ["heat", "updated", "new", "rating"].includes(params.sort) ? params.sort : "heat";
+    const sorted = teaserSort(merged.filter(entry => teaserMatches(entry, filter)), sort);
+    return Utils.paginate(sorted, Math.max(1, parseInt(params.page, 10) || 1), 12).map(entry => {
+      const mediaType = entry.mediaType === "movie" ? "movie" : "tv";
+      const tmdbId = Number(entry.tmdbId);
+      const link = `tmdb:${mediaType}:${tmdbId}`;
+      return {
+        id: link, link, type: "url", mediaType, tmdbId,
+        title: mgTitleClean(entry.displayTitle || entry.title),
+        description: entry.teaser || "", posterUrl: entry.posterPath || "", backdropUrl: entry.backdropPath || entry.posterPath || "",
+        releaseDate: entry.releaseDate || "",
+        rating: Number(entry.rating) > 0 ? Number(entry.rating) : undefined,
+        genreTitle: teaserTags(entry).join(" / ")
+      };
+    });
+  } catch (error) {
+    console.error("[loadQqTeaserMerged] 失败:", error.message || error);
+    throw error;
+  }
 }
 globalThis.loadDouban = loadDouban;
+globalThis.loadDoubanComments = loadDoubanComments;
 globalThis.loadTheater = loadTheater;
 globalThis.loadBangumi = loadBangumi;
 globalThis.loadMangoTV = loadMangoTV;
+globalThis.loadFlixPatrol = loadFlixPatrol;
+globalThis.loadFlixPatrolRanked = loadFlixPatrolRanked;
+globalThis.loadQqTeaserMerged = loadQqTeaserMerged;
+globalThis.loadGuduo = loadGuduo;
+globalThis.loadAniGamer = loadAniGamer;
 })();
 
 /* ══════════ Globalseries ══════════ */
@@ -7828,7 +8957,6 @@ async function loadGuduoRank(params = {}) {
         // 把排名 (TOP x) 移到了简介的第一行，旁边跟着热度和评分
         description: `🏆 TOP ${item.rank} | 🔥 热度: ${item.heat} | 评分: ${item.rating}\n\n${item.overview}`,
         
-        // 竖版卡片读 posterUrl（完整 URL），横版读 coverUrl；backdropUrl 兜底
         coverUrl: coverUrl,
         posterUrl: coverUrl,
         backdropUrl: coverUrl,
@@ -7867,9 +8995,9 @@ var __ChPoly=(()=>{var es=Object.create;var Lt=Object.defineProperty;var us=Obje
 // =========================================================================
 
 const currentYear = new Date().getFullYear();
-const startYear = Math.max(currentYear + 1, 2026); 
+const startYear = Math.max(currentYear + 1, 2026);
 const yearOptions = [];
-for (let year = startYear; year >= 1940; year--) { 
+for (let year = startYear; year >= 1940; year--) {
     yearOptions.push({ title: `${year}`, value: `${year}` });
 }
 
@@ -7882,8 +9010,8 @@ const ScrapingCache = {
 const DEFAULT_TRAKT_ID = "95b59922670c84040db3632c7aac6f33704f6ffe5cbf3113a056e37cb45cb482";
 
 const GLOBAL_GENRE_MAP_ALL = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑", 
-    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑",
+    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭",
     36: "历史", 10402: "音乐", 10770: "电视电影", 53: "惊悚", 10752: "战争", 37: "西部", 28: "动作", 12: "冒险",
     10762: "儿童", 10763: "新闻", 10764: "真人秀", 10766: "肥皂剧", 10767: "脱口秀", 10768: "战综"
 };
@@ -7896,17 +9024,14 @@ function getGlobalGenreText(ids) {
 
 // 统一 UI 卡片构建工厂
 function buildItem({ id, tmdbId, type, title, date, poster, backdrop, rating, genreText, subTitle, desc }) {
-    const baseInfo = [date, subTitle].filter(Boolean).join(" · ");
-    const overview = desc ? `\n${desc}` : "\n暂无简介";
-
     return {
         id: String(id),
         tmdbId: parseInt(tmdbId) || parseInt(id),
         type: "tmdb",
         mediaType: type,
         title: title,
-        genreTitle: genreText || (type === "tv" ? "剧集" : "电影"), 
-        description: baseInfo ? (baseInfo + overview) : (desc || "暂无简介"),
+        genreTitle: genreText || (type === "tv" ? "剧集" : "电影"),
+        description: desc || "",
         releaseDate: date, posterUrl: poster ? `https://image.tmdb.org/t/p/w500${poster}` : "", backdropUrl: backdrop ? `https://image.tmdb.org/t/p/w780${backdrop}` : "",
         subTitle: subTitle
     };
@@ -7985,8 +9110,8 @@ async function routeTrendsHub(params) {
 }
 
 const MOVIE_GENRE_MAP = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑", 
-    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑",
+    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭",
     36: "历史", 10402: "音乐", 10770: "电视电影", 53: "惊悚", 10752: "战争", 37: "西部", 28: "动作", 12: "冒险"
 };
 function movie_getGenreText(ids) {
@@ -7999,9 +9124,9 @@ function movie_buildItem(item) {
     const releaseDate = item.release_date || "";
     return {
         id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: "movie",
-        title: item.title, releaseDate: releaseDate, genreTitle: movie_getGenreText(item.genre_ids),    
-        subTitle: `${releaseDate.substring(0,4)}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
-        description: `电影\n${item.overview || "暂无简介"}`
+        title: item.title, releaseDate: releaseDate, genreTitle: movie_getGenreText(item.genre_ids),
+        subTitle: `${releaseDate.substring(0,4)}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
+        description: item.overview || ""
     };
 }
 
@@ -8009,14 +9134,14 @@ async function loadGeneralMovies(params) {
     const sortBy = params.sort_by || "popular";
     let endpoint = "/movie/popular";
     let queryParams = { language: "zh-CN", page: params.page || 1 };
-    
+
     if (sortBy === "top_rated") endpoint = "/movie/top_rated";
     else if (sortBy === "box_office") { endpoint = "/discover/movie"; queryParams.sort_by = "revenue.desc"; }
-    else if (sortBy === "oscar") { 
-        endpoint = "/discover/movie"; 
-        queryParams.with_keywords = "818"; 
-        queryParams.sort_by = "vote_average.desc"; 
-        queryParams["vote_count.gte"] = 1000; 
+    else if (sortBy === "oscar") {
+        endpoint = "/discover/movie";
+        queryParams.with_keywords = "818";
+        queryParams.sort_by = "vote_average.desc";
+        queryParams["vote_count.gte"] = 1000;
     }
     try { const res = await Widget.tmdb.get(endpoint, { params: queryParams }); return (res.results || []).map(i => movie_buildItem(i)).filter(Boolean); } catch (e) { return []; }
 }
@@ -8054,13 +9179,13 @@ async function fetchGenreRankData(mediaType, genre, region, sort_rule, page) {
     try {
         const res = await Widget.tmdb.get(`/discover/${mediaType}`, { params: queryParams });
         return (res.results || []).map(item => {
-            const date = item.release_date || item.first_air_date || ""; 
+            const date = item.release_date || item.first_air_date || "";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.title || item.name,
                 genreTitle: getGlobalGenreText(item.genre_ids),
                 releaseDate: date,
-                subTitle: `${date ? date.substring(0, 4) : "未知"}`, 
-                description: `${date}\n${item.overview || "暂无简介"}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
+                subTitle: `${date ? date.substring(0, 4) : "未知"}`,
+                description: item.overview || "", posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
                 _popularity: item.popularity || 0,
                 _date: date || "1970-01-01"
             };
@@ -8070,9 +9195,9 @@ async function fetchGenreRankData(mediaType, genre, region, sort_rule, page) {
 
 async function MakkaPakka_ALL__loadGenreRank(params = {}) {
     const page = parseInt(params.page) || 1;
-    const mediaType = params.sort_by || "all"; 
-    const genre = params.genre || "all"; 
-    const region = params.region || "all"; 
+    const mediaType = params.sort_by || "all";
+    const genre = params.genre || "all";
+    const region = params.region || "all";
     const sort_rule = params.order_rule || "popularity";
 
     if (mediaType === "all") {
@@ -8081,12 +9206,12 @@ async function MakkaPakka_ALL__loadGenreRank(params = {}) {
             fetchGenreRankData("tv", genre, region, sort_rule, page)
         ]);
         let items = [...movies, ...tvs];
-        items.sort((a, b) => { 
-            if (sort_rule === "popularity") return b._popularity - a._popularity; 
-            else if (sort_rule === "time") return new Date(b._date) - new Date(a._date); 
-            else return b.rating - a.rating; 
+        items.sort((a, b) => {
+            if (sort_rule === "popularity") return b._popularity - a._popularity;
+            else if (sort_rule === "time") return new Date(b._date) - new Date(a._date);
+            else return b.rating - a.rating;
         });
-        items = items.slice(0, 20); 
+        items = items.slice(0, 20);
         if (items.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "未找到符合条件" }] : [];
         return items;
     } else {
@@ -8126,9 +9251,9 @@ async function loadVarietyShows(params = {}) {
     } else if (list_type === "hot") {
         queryParams.sort_by = "popularity.desc";
     } else if (list_type === "trend") {
-        queryParams.sort_by = "popularity.desc"; queryParams["first_air_date.gte"] = fiveYearsAgoStr; 
+        queryParams.sort_by = "popularity.desc"; queryParams["first_air_date.gte"] = fiveYearsAgoStr;
     } else if (list_type === "top") {
-        queryParams.sort_by = "vote_average.desc"; queryParams["vote_count.gte"] = 15; 
+        queryParams.sort_by = "vote_average.desc"; queryParams["vote_count.gte"] = 15;
     }
 
     try {
@@ -8136,14 +9261,14 @@ async function loadVarietyShows(params = {}) {
         const items = res.results || [];
         if (items.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "暂无综艺数据" }] : [];
         return items.map(item => {
-            const date = item.release_date || item.first_air_date || ""; 
+            const date = item.release_date || item.first_air_date || "";
             let genreLabel = getGlobalGenreText(item.genre_ids);
             if (genreLabel === "影视") genreLabel = "综艺";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: "tv", title: item.title || item.name,
-                genreTitle: genreLabel, releaseDate: date, 
-                subTitle: `${date ? date.substring(0, 4) : "未知"}`, 
-                description: `${date}\n${item.overview || "暂无简介"}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : ""
+                genreTitle: genreLabel, releaseDate: date,
+                subTitle: `${date ? date.substring(0, 4) : "未知"}`,
+                description: item.overview || "", posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : ""
             };
         });
     } catch (e) { return [{ id: "err", type: "text", title: "加载失败" }]; }
@@ -8168,19 +9293,74 @@ async function loadRottenTomatoesTrends(listType, page) {
 }
 
 async function fetchRottenTomatoesList(type) {
+    const RT_URLS = {
+        "rt_movies_theater": "https://www.rottentomatoes.com/browse/movies_in_theaters/sort:popular?minTomato=75",
+        "rt_movies_home": "https://www.rottentomatoes.com/browse/movies_at_home/sort:popular?minTomato=75",
+        "rt_movies_best": "https://www.rottentomatoes.com/browse/movies_at_home/sort:critic_highest?minTomato=90",
+        "rt_tv_popular": "https://www.rottentomatoes.com/browse/tv_series_browse/sort:popular?minTomato=75",
+        "rt_tv_new": "https://www.rottentomatoes.com/browse/tv_series_browse/sort:newest?minTomato=75"
+    };
     const url = RT_URLS[type] || RT_URLS["rt_movies_home"];
+
     try {
-        const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0" } });
-        const $ = Widget.html.load(res.data || "");
-        const items = [];
-        $('[data-qa="discovery-media-list-item"]').each((i, el) => {
-            const $el = $(el);
-            const title = $el.find('[data-qa="discovery-media-list-item-title"]').text().trim();
-            if (!title) return;
-            const scoreEl = $el.find('score-pairs');
-            items.push({ title: title, tomatoScore: scoreEl.attr('critics-score') || "", popcornScore: scoreEl.attr('audiencescore') || "", mediaType: type.includes("tv") ? "tv" : "movie" });
+        const res = await Widget.http.get(url, {
+            headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" }
         });
-        return items;
+        const html = typeof res === 'string' ? res : (res.data || "");
+        const $ = Widget.html.load(html);
+        const items = [];
+
+        // 🚀 同步：逆向DOM树遍历解析
+        const titleNodes = $('[data-qa="discovery-media-list-item-title"], [data-qa="list-item-title"], .js-tile-link .p--small');
+
+        if (titleNodes.length > 0) {
+            titleNodes.each((i, el) => {
+                const title = $(el).text().trim();
+                if (!title) return;
+
+                // 像爬树一样往上找：匹配最稳定的卡片容器
+                let container = $(el).parent();
+                for (let level = 0; level < 5; level++) {
+                    if (container.find('score-board, score-pairs, score-pairs-deprecated').length > 0) break;
+                    if (container.length === 0) break;
+                    container = container.parent();
+                }
+
+                let tomatoScore = "";
+                let popcornScore = "";
+
+                // 兼容最新版 <score-board> 和老版标签
+                const scoreTags = ['score-board', 'score-pairs', 'score-pairs-deprecated'];
+                for (const tag of scoreTags) {
+                    const scoreEl = container.find(tag);
+                    if (scoreEl.length > 0) {
+                        tomatoScore = scoreEl.attr('tomatometerscore') || scoreEl.attr('critics-score') || scoreEl.attr('criticsscore') || "";
+                        popcornScore = scoreEl.attr('audiencescore') || scoreEl.attr('audience-score') || "";
+                        break;
+                    }
+                }
+
+                items.push({
+                    title: title,
+                    tomatoScore: tomatoScore,
+                    popcornScore: popcornScore,
+                    mediaType: type.includes("tv") ? "tv" : "movie"
+                });
+            });
+        }
+
+        // 去重防御
+        const uniqueItems = [];
+        const seen = new Set();
+        for (const item of items) {
+            const cleanTitle = item.title.replace(/\s+/g, ' ').trim();
+            if (cleanTitle && !seen.has(cleanTitle)) {
+                seen.add(cleanTitle);
+                item.title = cleanTitle;
+                uniqueItems.push(item);
+            }
+        }
+        return uniqueItems;
     } catch (e) { return []; }
 }
 
@@ -8195,11 +9375,11 @@ async function searchRtTmdb(rtItem, rank) {
         if (rtItem.popcornScore) scores.push(`🍿 ${rtItem.popcornScore}%`);
         const customSub = scores.join("  ") || "烂番茄认证";
         const dateStr = match.first_air_date || match.release_date || "";
-        
+
         return {
-            id: String(match.id), tmdbId: match.id, type: "tmdb", mediaType: rtItem.mediaType, title: `${rank}. ${match.name || match.title}`, 
+            id: String(match.id), tmdbId: match.id, type: "tmdb", mediaType: rtItem.mediaType, title: `${rank}. ${match.name || match.title}`,
             genreTitle: getGlobalGenreText(match.genre_ids) || (rtItem.mediaType === "movie" ? "电影" : "剧集"),
-            description: `${dateStr}\n原名: ${rtItem.title}`, releaseDate: dateStr, subTitle: customSub, posterUrl: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : "", backdropUrl: match.backdrop_path ? `https://image.tmdb.org/t/p/w780${match.backdrop_path}` : ""
+            description: match.overview || "", releaseDate: dateStr, subTitle: customSub, posterUrl: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : "", backdropUrl: match.backdrop_path ? `https://image.tmdb.org/t/p/w780${match.backdrop_path}` : ""
         };
     } catch (e) { return null; }
 }
@@ -8207,13 +9387,13 @@ async function searchRtTmdb(rtItem, rank) {
 function buildImdbItem(item, forceType) {
     if (!item) return null;
     const type = forceType || item.media_type || (item.title ? "movie" : "tv");
-    const fullDate = item.release_date || item.first_air_date || ""; 
+    const fullDate = item.release_date || item.first_air_date || "";
     return {
         id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: type, title: item.title || item.name,
-        subTitle: fullDate || "", 
-        description: fullDate ? `${fullDate}\n${item.overview || "暂无简介"}` : (item.overview || "暂无简介"),
+        subTitle: fullDate || "",
+        description: item.overview || "",
         releaseDate: fullDate, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-        year: fullDate.substring(0, 4), 
+        year: fullDate.substring(0, 4),
         genreTitle: getGlobalGenreText(item.genre_ids) || (type === "tv" ? "剧集" : "电影")
     };
 }
@@ -8262,11 +9442,11 @@ async function handleTraktList(listType, traktType, traktClientId, page) {
     } else {
         rawData = await fetchTraktData(traktType, listType, traktClientId, page);
     }
-    if (!rawData || rawData.length === 0) return page === 1 ? [] : []; 
+    if (!rawData || rawData.length === 0) return page === 1 ? [] : [];
     const promises = rawData.slice(0, 20).map(async (item, index) => {
         let subject = item.show || item.movie || item;
         const mediaType = item.show ? "tv" : "movie";
-        let stats = listType === "trending" ? `🔥 ${item.watchers || 0} 人在看` : (listType === "anticipated" ? `❤️ ${item.list_count || 0} 人想看` : `No. ${(page - 1) * 15 + index + 1}`); 
+        let stats = listType === "trending" ? `🔥 ${item.watchers || 0} 人在看` : (listType === "anticipated" ? `❤️ ${item.list_count || 0} 人想看` : `No. ${(page - 1) * 15 + index + 1}`);
         if (traktType === "all") stats = `[${mediaType === "tv" ? "剧" : "影"}] ${stats}`;
         if (!subject || !subject.ids || !subject.ids.tmdb) return null;
         try {
@@ -8274,8 +9454,8 @@ async function handleTraktList(listType, traktType, traktClientId, page) {
             return {
                 id: String(d.id), tmdbId: d.id, type: "tmdb", mediaType: mediaType, title: d.name || d.title || subject.title,
                 genreTitle: getGlobalGenreText(d.genres?.map(g => g.id)), releaseDate: d.first_air_date || d.release_date || "",
-                subTitle: stats, 
-                description: `${d.first_air_date || d.release_date || ""}\n${d.overview || "暂无简介"}`, posterUrl: d.poster_path ? `https://image.tmdb.org/t/p/w500${d.poster_path}` : "", backdropUrl: d.backdrop_path ? `https://image.tmdb.org/t/p/w780${d.backdrop_path}` : ""
+                subTitle: stats,
+                description: d.overview || "", posterUrl: d.poster_path ? `https://image.tmdb.org/t/p/w500${d.poster_path}` : "", backdropUrl: d.backdrop_path ? `https://image.tmdb.org/t/p/w780${d.backdrop_path}` : ""
             };
         } catch (e) { return null; }
     });
@@ -8287,7 +9467,7 @@ function mergeDoubanTmdb(target, source) {
     target.posterPath = source.poster_path ? `https://image.tmdb.org/t/p/w500${source.poster_path}` : target.posterPath;
     target.backdropPath = source.backdrop_path ? `https://image.tmdb.org/t/p/w780${source.backdrop_path}` : "";
     const date = source.first_air_date || source.release_date || ""; target.genreTitle = getGlobalGenreText(source.genre_ids) || (target.mediaType === "tv" ? "剧集" : "电影"); target.releaseDate = date;
-    target.description = (date ? `${date} · ${target.subTitle}` : target.subTitle) + (source.overview ? `\n${source.overview}` : "\n暂无简介"); target.rating = source.vote_average ? parseFloat(source.vote_average) : 0;
+    target.description = source.overview || ""; target.rating = source.vote_average ? parseFloat(source.vote_average) : 0;
 }
 
 async function searchTmdbForDouban(query, type) {
@@ -8303,11 +9483,11 @@ async function fetchDoubanAndMap(tag, type, page) {
     try {
         const randomBid = Math.random().toString(36).substring(2, 13);
         const res = await Widget.http.get(`https://movie.douban.com/j/search_subjects?type=${type}&tag=${encodeURIComponent(tag)}&sort=recommend&page_limit=20&page_start=${start}`, {
-            headers: { 
+            headers: {
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X)",
                 "Referer": "https://movie.douban.com/explore",
                 "Host": "movie.douban.com",
-                "X-Requested-With": "XMLHttpRequest", 
+                "X-Requested-With": "XMLHttpRequest",
                 "Cookie": `bid=${randomBid};`
             }
         });
@@ -8315,21 +9495,22 @@ async function fetchDoubanAndMap(tag, type, page) {
         const data = (typeof res.data === 'string') ? JSON.parse(res.data) : (res.data || {});
         const list = data.subjects || [];
         if (list.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "暂无数据" }] : [];
-        
+
         const promises = list.map(async item => {
-            let finalItem = { 
-                id: `db_${item.id}`, type: "tmdb", mediaType: type, 
-                title: item.title, subTitle: `豆瓣 ${item.rate}`, 
-                description: `豆瓣 ${item.rate}\n暂无简介`, 
-                genreTitle: type === "tv" ? "剧集" : "电影", posterUrl: item.cover 
+            let finalItem = {
+                id: `db_${item.id}`, type: "tmdb", mediaType: type,
+                title: item.title, subTitle: `豆瓣 ${item.rate}`,
+                description: "",
+                genreTitle: type === "tv" ? "剧集" : "电影", posterUrl: item.cover
             };
             const tmdb = await searchTmdbForDouban(item.title, type);
-            if (tmdb) mergeDoubanTmdb(finalItem, tmdb); 
+            if (!tmdb) return null;
+            mergeDoubanTmdb(finalItem, tmdb);
             return finalItem;
         });
-        return await Promise.all(promises);
-    } catch (e) { 
-        return [{ id: "err", type: "text", title: "豆瓣拒绝了请求", description: "网络IP被豆瓣限制，请切换流量(4G/5G)或更换节点。" }]; 
+        return (await Promise.all(promises)).filter(Boolean);
+    } catch (e) {
+        return [{ id: "err", type: "text", title: "豆瓣拒绝了请求", description: "网络IP被豆瓣限制，请切换流量(4G/5G)或更换节点。" }];
     }
 }
 
@@ -8363,16 +9544,16 @@ async function loadPlatformMatrixData(mediaType, params) {
         return res.results.map(item => {
             const date = item.first_air_date || item.release_date || "";
             return {
-                id: String(item.id), tmdbId: item.id, type: "tmdb", mediaType: mediaType, title: item.name || item.title, date: date, releaseDate: date, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
+                id: String(item.id), tmdbId: item.id, type: "tmdb", mediaType: mediaType, title: item.name || item.title, date: date, releaseDate: date, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
                 genreTitle: getGlobalGenreText(item.genre_ids),
-                description: `${date}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         });
     } catch (e) { return [{ id: "err", type: "text", title: "流媒体拉取失败" }]; }
 }
 
 async function loadOfficialTop10(params = {}) {
-    const region = params.sort_by || "united-states"; 
+    const region = params.sort_by || "united-states";
     const platform = params.platform || "netflix";
     const mediaType = params.mediaType || "tv";
 
@@ -8382,7 +9563,7 @@ async function loadOfficialTop10(params = {}) {
         return await fetchTmdbFallback_Top10(platform, region, mediaType);
     }
 
-    const searchPromises = titles.slice(0, 10).map((title, index) => 
+    const searchPromises = titles.slice(0, 10).map((title, index) =>
         searchTmdbForTop10(title, mediaType, index + 1)
     );
 
@@ -8396,26 +9577,38 @@ async function loadOfficialTop10(params = {}) {
 }
 
 async function fetchFlixPatrolData(platform, region, mediaType) {
-    const url = region === "world" ? `https://flixpatrol.com/top10/${platform}/` : `https://flixpatrol.com/top10/${platform}/${region}/`;
+    const url = `https://flixpatrol.com/top10/${platform}/${region}/`;
     try {
-        const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0" } });
+        const res = await Widget.http.get(url, {
+            headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1" }
+        });
         const html = typeof res === 'string' ? res : (res.data || "");
-        if (!html) return [];
         const $ = Widget.html.load(html);
         const tables = $('.card-table tbody');
-        
-        let targetTable = null;
-        if (tables.length >= 2) targetTable = mediaType === "movie" ? tables.eq(0) : tables.eq(1);
-        else if (tables.length === 1) targetTable = tables.eq(0);
-        else return [];
+        if (tables.length === 0) return [];
 
+        // 🚀 同步：修正后的平台表格索引逻辑
+        let tableIndex = 0;
+        if (platform === "disney") {
+            tableIndex = mediaType === "all" ? 0 : (mediaType === "movie" ? 1 : 2);
+        } else if (platform === "hbo") {
+            tableIndex = mediaType === "movie" ? 0 : 1;
+        } else {
+            tableIndex = mediaType === "movie" ? 0 : (mediaType === "tv" ? 1 : 2);
+        }
+
+        if (tableIndex >= tables.length) tableIndex = tables.length - 1;
+
+        const targetTable = tables.eq(tableIndex);
         const titles = [];
         targetTable.find('tr').each((i, el) => {
-            if (i >= 10) return; 
+            if (i >= 10) return;
             const textLink = $(el).find('a.hover\\:underline').text().trim();
             const textTd = $(el).find('td').eq(2).text().trim();
             const finalTitle = textLink || textTd;
-            if (finalTitle && finalTitle.length > 1) titles.push(finalTitle.split('(')[0].trim());
+            if (finalTitle && finalTitle.length > 1) {
+                titles.push(finalTitle.split('(')[0].trim());
+            }
         });
         return titles;
     } catch (e) { return []; }
@@ -8426,13 +9619,13 @@ async function searchTmdbForTop10(queryTitle, mediaType, rank) {
         const data = await Widget.tmdb.get(`/search/${mediaType}`, { params: { query: queryTitle.trim(), language: "zh-CN", page: 1 } });
         if (data && data.results && data.results.length > 0) {
             let item = data.results[0];
-            const date = item.first_air_date || item.release_date || ""; 
-            
+            const date = item.first_air_date || item.release_date || "";
+
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.name || item.title,
                 releaseDate: date, year: date.substring(0, 4), genreTitle: getGlobalGenreText(item.genre_ids),
                 subTitle: `TOP ${rank}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-                description: `TOP ${rank}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         }
     } catch (e) {} return null;
@@ -8444,18 +9637,18 @@ async function fetchTmdbFallback_Top10(platform, region, mediaType) {
     try {
         const data = await Widget.tmdb.get(`/discover/${mediaType}`, { params: { watch_region: regionMap[region] || "US", with_watch_providers: providerMap[platform] || "8", sort_by: "popularity.desc", page: 1, language: "zh-CN" } });
         return (data.results || []).slice(0, 10).map((item, index) => {
-            const date = item.first_air_date || item.release_date || ""; 
+            const date = item.first_air_date || item.release_date || "";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.name || item.title,
                 releaseDate: date, year: date.substring(0, 4), genreTitle: getGlobalGenreText(item.genre_ids), subTitle: `TOP ${index + 1}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-                description: `TOP ${index + 1}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         });
     } catch (e) { return []; }
 }
 
 const GENRE_MAP = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻",
     878: "科幻", 9648: "悬疑", 10749: "爱情", 27: "恐怖", 10765: "科幻奇幻"
 };
 
@@ -8480,20 +9673,20 @@ async function searchTmdbAnimeStrict(title1, title2, year) {
     async function doSearch(query) {
         if (!query || typeof query !== 'string') return null;
         const cleanQuery = query.replace(/第[一二三四五六七八九十\d]+[季章]/g, "").replace(/Season \d+/i, "").trim();
-        
+
         try {
             let params = { query: cleanQuery, language: "zh-CN", include_adult: false };
             if (year) params.first_air_date_year = year;
-            
+
             let res = await Widget.tmdb.get("/search/tv", { params });
             let candidates = res.results || [];
-            
+
             if (candidates.length === 0 && year) {
                 delete params.first_air_date_year;
                 res = await Widget.tmdb.get("/search/tv", { params });
                 candidates = res.results || [];
             }
-            
+
             let animeTvs = candidates.filter(r => r.genre_ids?.includes(16));
             if (animeTvs.length > 0) return animeTvs.find(r => r.poster_path) || animeTvs[0];
 
@@ -8507,7 +9700,7 @@ async function searchTmdbAnimeStrict(title1, title2, year) {
                 res = await Widget.tmdb.get("/search/movie", { params: mParams });
                 candidates = res.results || [];
             }
-            
+
             let animeMovies = candidates.filter(r => r.genre_ids?.includes(16));
             if (animeMovies.length > 0) return animeMovies.find(r => r.poster_path) || animeMovies[0];
 
@@ -8526,13 +9719,13 @@ async function sanitizeAndEnsureTmdb(items) {
     if (!items || !Array.isArray(items)) return [];
     const promises = items.map(async (item) => {
         const title = item.name_cn || item.title || item.name;
-        const subTitle = item.title !== title ? item.title : null; 
+        const subTitle = item.title !== title ? item.title : null;
         const rawDate = item.releaseDate || item.description || item.air_date || item.info || "";
         const yearMatch = rawDate.match(/(\d{4})/);
         const year = yearMatch ? yearMatch[1] : null;
 
         const tmdbMatch = await searchTmdbAnimeStrict(title, subTitle, year);
-        
+
         if (tmdbMatch) {
             return {
                 id: String(tmdbMatch.id),
@@ -8541,14 +9734,14 @@ async function sanitizeAndEnsureTmdb(items) {
                 mediaType: tmdbMatch.title ? "movie" : "tv",
                 title: tmdbMatch.name || tmdbMatch.title || title,
                 genreTitle: getGenreText(tmdbMatch.genre_ids),
-                description: tmdbMatch.first_air_date || tmdbMatch.release_date || parseDate(rawDate) || "即将播出",
+                description: tmdbMatch.overview || "",
                 releaseDate: tmdbMatch.first_air_date || tmdbMatch.release_date || parseDate(rawDate), posterUrl: tmdbMatch.poster_path ? `https://image.tmdb.org/t/p/w500${tmdbMatch.poster_path}` : "", backdropUrl: tmdbMatch.backdrop_path ? `https://image.tmdb.org/t/p/w780${tmdbMatch.backdrop_path}` : "",
                 rating: tmdbMatch.vote_average ? tmdbMatch.vote_average.toFixed(1) : (item.rating || "0.0")
             };
         }
-        return null; 
+        return null;
     });
-    
+
     const results = await Promise.all(promises);
     return results.filter(Boolean);
 }
@@ -8560,12 +9753,12 @@ async function loadBangumiCalendar(params = {}) {
         const jsDay = new Date().getDay();
         targetDayId = jsDay === 0 ? 7 : jsDay;
     }
-    
+
     try {
         const res = await Widget.http.get("https://api.bgm.tv/calendar");
         const dayData = (res.data || []).find(d => d.weekday && d.weekday.id === targetDayId);
         if (!dayData) return [];
-        
+
         const pageSize = 20;
         const pageItems = dayData.items.slice((page - 1) * pageSize, page * pageSize);
 
@@ -8588,7 +9781,7 @@ async function loadBangumiCalendar(params = {}) {
                 desc: tmdbItem.overview || item.summary || "暂无简介"
             });
         });
-        
+
         const results = await Promise.all(promises);
         return results.filter(Boolean);
     } catch (e) { return []; }
@@ -8599,7 +9792,7 @@ async function loadBangumiCalendar(params = {}) {
 // =========================================================================
 async function fetchRecentHot(params = {}) {
     const url = "https://raw.githubusercontent.com/MakkaPakka518/List/refs/heads/main/data/bangumi-hot.json";
-    
+
     try {
         const res = await Widget.http.get(url);
         const data = res.data || {};
@@ -8616,10 +9809,6 @@ async function fetchRecentHot(params = {}) {
         const pageItems = hotList.slice(start, start + pageSize);
 
         return pageItems.map((item, index) => {
-            // 智能过滤简介：去除原数据自带的第一行（年份·评分·国家），防止和原生排版重复
-            const descLines = (item.description || "").split('\n');
-            const pureDesc = descLines.length > 1 ? descLines.slice(1).join('\n') : item.description;
-
             return buildItem({
                 id: item.id,
                 tmdbId: item.tmdbId,
@@ -8630,10 +9819,10 @@ async function fetchRecentHot(params = {}) {
                 backdrop: item.backdropPath,
                 genreText: item.genreTitle,
                 subTitle: `🔥 热度 TOP ${start + index + 1}`,
-                desc: pureDesc || "暂无简介"
+                desc: item.description || item.overview || ""
             });
         });
-        
+
     } catch (error) {
         return [{ id: "error", type: "text", title: "网络异常", description: "获取热门列表失败" }];
     }
@@ -8653,7 +9842,7 @@ async function fetchAirtimeRanking(params = {}) {
     if (ScrapingCache.airtime[cacheKey]) {
         return await sanitizeAndEnsureTmdb(ScrapingCache.airtime[cacheKey]);
     }
-    
+
     let url = `https://bgm.tv/${category}/browser/airtime/${year}/${month}?sort=${sort}&page=${page}`;
     const results = await DynamicDataProcessor.processBangumiPage(url, category);
     ScrapingCache.airtime[cacheKey] = results;
@@ -8665,10 +9854,10 @@ async function fetchDailyCalendarApi(params = {}) {
         ScrapingCache.daily = await DynamicDataProcessor.processDailyCalendar();
     }
     let items = ScrapingCache.daily || [];
-    
+
     const { filterType = "today", specificWeekday = "1", dailySortOrder = "popularity_rat_bgm" } = params;
     const JS_DAY_TO_BGM_API_ID = { 0: 7, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 };
-    
+
     let filteredByDay = [];
     if (filterType === "all_week") {
         filteredByDay = items;
@@ -8702,8 +9891,8 @@ async function fetchDailyCalendarApi(params = {}) {
 }
 
 async function loadBilibiliRank(params = {}) {
-    const { sort_by = "1", page = 1 } = params; 
-    const url = `https://api.bilibili.com/pgc/web/rank/list?day=3&season_type=${sort_by}`; 
+    const { sort_by = "1", page = 1 } = params;
+    const url = `https://api.bilibili.com/pgc/web/rank/list?day=3&season_type=${sort_by}`;
     try {
         const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0", "Referer": "https://www.bilibili.com/" } });
         const data = res.data || {};
@@ -8714,7 +9903,7 @@ async function loadBilibiliRank(params = {}) {
         const promises = slicedList.map(async (item) => {
             const cleanTitle = item.title.replace(/第[一二三四五六七八九十\d]+[季章]/g, "").trim();
             const tmdbItem = await searchTmdbAnimeStrict(cleanTitle, item.title, null);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({
                 id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title,
                 date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1),
@@ -8722,17 +9911,17 @@ async function loadBilibiliRank(params = {}) {
             });
         });
         const results = await Promise.all(promises);
-        return results.filter(Boolean); 
+        return results.filter(Boolean);
     } catch (e) { return []; }
 }
 
 async function loadTmdbAnimeRanking(params = {}) {
-    const { sort_by = "trending", page = 1 } = params; 
+    const { sort_by = "trending", page = 1 } = params;
     let queryParams = { language: "zh-CN", page: page, with_genres: "16", with_original_language: "ja" };
-    
-    if (sort_by === "trending") queryParams.sort_by = "popularity.desc"; 
-    else if (sort_by === "new") queryParams.sort_by = "first_air_date.desc"; 
-    else if (sort_by === "top") queryParams.sort_by = "vote_average.desc"; 
+
+    if (sort_by === "trending") queryParams.sort_by = "popularity.desc";
+    else if (sort_by === "new") queryParams.sort_by = "first_air_date.desc";
+    else if (sort_by === "top") queryParams.sort_by = "vote_average.desc";
 
     try {
         const res = await Widget.tmdb.get("/discover/tv", { params: queryParams });
@@ -8743,14 +9932,14 @@ async function loadTmdbAnimeRanking(params = {}) {
 }
 
 async function loadAniListRanking(params = {}) {
-    const { sort_by = "TRENDING_DESC", page = 1 } = params; 
-    const query = `query ($page: Int, $perPage: Int) { Page (page: $page, perPage: $perPage) { media (sort: ${sort_by}, type: ANIME) { title { native romaji english } averageScore seasonYear } } }`; 
+    const { sort_by = "TRENDING_DESC", page = 1 } = params;
+    const query = `query ($page: Int, $perPage: Int) { Page (page: $page, perPage: $perPage) { media (sort: ${sort_by}, type: ANIME) { title { native romaji english } averageScore seasonYear } } }`;
     try {
         const res = await Widget.http.post("https://graphql.anilist.co", { query, variables: { page, perPage: 20 } });
         const data = res.data?.data?.Page?.media || [];
         const promises = data.map(async (media) => {
             const tmdbItem = await searchTmdbAnimeStrict(media.title.native || media.title.romaji, media.title.english, media.seasonYear);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({ id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title, date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1), genreText: getGlobalGenreText(tmdbItem.genre_ids), desc: tmdbItem.overview });
         });
         const results = await Promise.all(promises);
@@ -8759,17 +9948,17 @@ async function loadAniListRanking(params = {}) {
 }
 
 async function loadMalRanking(params = {}) {
-    const { sort_by = "airing", page = 1 } = params; 
+    const { sort_by = "airing", page = 1 } = params;
     let apiParams = { page: page };
-    if (sort_by === "airing") apiParams.filter = "airing"; 
-    else if (sort_by === "upcoming") apiParams.filter = "upcoming"; 
+    if (sort_by === "airing") apiParams.filter = "airing";
+    else if (sort_by === "upcoming") apiParams.filter = "upcoming";
 
     try {
         const res = await Widget.http.get("https://api.jikan.moe/v4/top/anime", { params: apiParams });
         const data = res.data?.data || [];
         const promises = data.map(async (item) => {
             const tmdbItem = await searchTmdbAnimeStrict(item.title_japanese || item.title, item.title_english, null);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({ id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title, date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1), genreText: getGlobalGenreText(tmdbItem.genre_ids), desc: tmdbItem.overview });
         });
         const results = await Promise.all(promises);
@@ -8819,6 +10008,32 @@ const DynamicDataProcessor = (() => {
     }
     return { processBangumiPage, processDailyCalendar };
 })();
+
+// Rex 根据 TMDB 身份和客户端语言/海报偏好完成首次元数据渲染。
+function toRexTmdbIdentities(items) {
+    return (Array.isArray(items) ? items : []).map(item => {
+        if (!item) return null;
+        if (item.type === "text") return item;
+        const mediaType = item.mediaType;
+        const tmdbId = Number(item.tmdbId || item.id);
+        if (!tmdbId || !["movie", "tv"].includes(mediaType)) return null;
+        return { id: `${mediaType}.${tmdbId}`, type: "tmdb" };
+    }).filter(Boolean);
+}
+
+function identityRoute(handler) {
+    return async function(params = {}) {
+        return toRexTmdbIdentities(await handler(params));
+    };
+}
+
+routeAnimeOmni = identityRoute(routeAnimeOmni);
+MakkaPakka_ALL__loadGenreRank = identityRoute(MakkaPakka_ALL__loadGenreRank);
+routeMovieOmni = identityRoute(routeMovieOmni);
+loadVarietyShows = identityRoute(loadVarietyShows);
+routeTrendsHub = identityRoute(routeTrendsHub);
+MakkaPakka_ALL__loadPlatformMatrix = identityRoute(MakkaPakka_ALL__loadPlatformMatrix);
+loadOfficialTop10 = identityRoute(loadOfficialTop10);
 globalThis.routeAnimeOmni = routeAnimeOmni;
 globalThis.MakkaPakka_ALL__loadGenreRank = MakkaPakka_ALL__loadGenreRank;
 globalThis.routeMovieOmni = routeMovieOmni;
