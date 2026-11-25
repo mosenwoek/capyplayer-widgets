@@ -13,9 +13,9 @@ var __ChPoly=(()=>{var es=Object.create;var Lt=Object.defineProperty;var us=Obje
 // =========================================================================
 
 const currentYear = new Date().getFullYear();
-const startYear = Math.max(currentYear + 1, 2026); 
+const startYear = Math.max(currentYear + 1, 2026);
 const yearOptions = [];
-for (let year = startYear; year >= 1940; year--) { 
+for (let year = startYear; year >= 1940; year--) {
     yearOptions.push({ title: `${year}`, value: `${year}` });
 }
 
@@ -28,8 +28,8 @@ const ScrapingCache = {
 const DEFAULT_TRAKT_ID = "95b59922670c84040db3632c7aac6f33704f6ffe5cbf3113a056e37cb45cb482";
 
 const GLOBAL_GENRE_MAP_ALL = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑", 
-    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑",
+    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭",
     36: "历史", 10402: "音乐", 10770: "电视电影", 53: "惊悚", 10752: "战争", 37: "西部", 28: "动作", 12: "冒险",
     10762: "儿童", 10763: "新闻", 10764: "真人秀", 10766: "肥皂剧", 10767: "脱口秀", 10768: "战综"
 };
@@ -42,17 +42,14 @@ function getGlobalGenreText(ids) {
 
 // 统一 UI 卡片构建工厂
 function buildItem({ id, tmdbId, type, title, date, poster, backdrop, rating, genreText, subTitle, desc }) {
-    const baseInfo = [date, subTitle].filter(Boolean).join(" · ");
-    const overview = desc ? `\n${desc}` : "\n暂无简介";
-
     return {
         id: String(id),
         tmdbId: parseInt(tmdbId) || parseInt(id),
         type: "tmdb",
         mediaType: type,
         title: title,
-        genreTitle: genreText || (type === "tv" ? "剧集" : "电影"), 
-        description: baseInfo ? (baseInfo + overview) : (desc || "暂无简介"),
+        genreTitle: genreText || (type === "tv" ? "剧集" : "电影"),
+        description: desc || "",
         releaseDate: date, posterUrl: poster ? `https://image.tmdb.org/t/p/w500${poster}` : "", backdropUrl: backdrop ? `https://image.tmdb.org/t/p/w780${backdrop}` : "",
         subTitle: subTitle
     };
@@ -66,17 +63,23 @@ var WidgetMetadata = {
     title: "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖·终极聚合",
     description: "动漫、影剧、综艺、流行风向与平台分流一网打尽",
     author: "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
-    version: "1.3.0", // 🚀 更新：彻底拔除旧废弃源，接入专属独立数据源，动态刮削纯净化
+    version: "1.4.0",
     requiredVersion: "0.0.1",
     site: "https://t.me/MakkaPakkaOvO",
-    
+
     globalParams: [
         {
             name: "traktClientId",
             title: "Trakt Client ID",
-            type: "string",
+            type: "input",
             description: "选填，不填则使用内置。Trakt 榜单专用。",
             value: ""
+        },
+        {
+            name: "language",
+            title: "语言",
+            type: "language",
+            value: "zh-CN"
         }
     ],
 
@@ -192,11 +195,11 @@ var WidgetMetadata = {
         {
             title: "🧭 影剧流行风向",
             functionName: "routeTrendsHub",
-            type: "media_list", 
+            type: "media_list",
             cacheDuration: 3600,
             params: [
                 {
-                    name: "hub_source", 
+                    name: "hub_source",
                     title: "选择平台",
                     type: "enum",
                     value: "imdb",
@@ -253,16 +256,16 @@ var WidgetMetadata = {
         {
             title: "🔀 平台分流片库",
             functionName: "loadPlatformMatrix",
-            type: "media_list", 
+            type: "media_list",
             cacheDuration: 3600,
             params: [
                 {
                     name: "sort_by", title: "内容分类", type: "enum", value: "tv_drama",
-                    enumOptions: [ 
-                        { title: "📺 电视剧", value: "tv_drama" }, 
-                        { title: "🎤 综艺", value: "tv_variety" }, 
-                        { title: "🐲 动漫", value: "tv_anime" }, 
-                        { title: "🎬 电影", value: "movie" } 
+                    enumOptions: [
+                        { title: "📺 电视剧", value: "tv_drama" },
+                        { title: "🎤 综艺", value: "tv_variety" },
+                        { title: "🐲 动漫", value: "tv_anime" },
+                        { title: "🎬 电影", value: "movie" }
                     ]
                 },
                 {
@@ -283,7 +286,7 @@ var WidgetMetadata = {
         {
             title: "🥇 流媒体TOP10",
             functionName: "loadOfficialTop10",
-            type: "media_list", 
+            type: "media_list",
             cacheDuration: 3600,
             params: [
                 {
@@ -376,8 +379,8 @@ async function routeTrendsHub(params) {
 }
 
 const MOVIE_GENRE_MAP = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑", 
-    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 878: "科幻", 9648: "悬疑",
+    10749: "爱情", 27: "恐怖", 10765: "科幻奇幻", 80: "犯罪", 99: "纪录片", 10751: "家庭",
     36: "历史", 10402: "音乐", 10770: "电视电影", 53: "惊悚", 10752: "战争", 37: "西部", 28: "动作", 12: "冒险"
 };
 function movie_getGenreText(ids) {
@@ -390,9 +393,9 @@ function movie_buildItem(item) {
     const releaseDate = item.release_date || "";
     return {
         id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: "movie",
-        title: item.title, releaseDate: releaseDate, genreTitle: movie_getGenreText(item.genre_ids),    
-        subTitle: `${releaseDate.substring(0,4)}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
-        description: `电影\n${item.overview || "暂无简介"}`
+        title: item.title, releaseDate: releaseDate, genreTitle: movie_getGenreText(item.genre_ids),
+        subTitle: `${releaseDate.substring(0,4)}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
+        description: item.overview || ""
     };
 }
 
@@ -400,14 +403,14 @@ async function loadGeneralMovies(params) {
     const sortBy = params.sort_by || "popular";
     let endpoint = "/movie/popular";
     let queryParams = { language: "zh-CN", page: params.page || 1 };
-    
+
     if (sortBy === "top_rated") endpoint = "/movie/top_rated";
     else if (sortBy === "box_office") { endpoint = "/discover/movie"; queryParams.sort_by = "revenue.desc"; }
-    else if (sortBy === "oscar") { 
-        endpoint = "/discover/movie"; 
-        queryParams.with_keywords = "818"; 
-        queryParams.sort_by = "vote_average.desc"; 
-        queryParams["vote_count.gte"] = 1000; 
+    else if (sortBy === "oscar") {
+        endpoint = "/discover/movie";
+        queryParams.with_keywords = "818";
+        queryParams.sort_by = "vote_average.desc";
+        queryParams["vote_count.gte"] = 1000;
     }
     try { const res = await Widget.tmdb.get(endpoint, { params: queryParams }); return (res.results || []).map(i => movie_buildItem(i)).filter(Boolean); } catch (e) { return []; }
 }
@@ -445,13 +448,13 @@ async function fetchGenreRankData(mediaType, genre, region, sort_rule, page) {
     try {
         const res = await Widget.tmdb.get(`/discover/${mediaType}`, { params: queryParams });
         return (res.results || []).map(item => {
-            const date = item.release_date || item.first_air_date || ""; 
+            const date = item.release_date || item.first_air_date || "";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.title || item.name,
                 genreTitle: getGlobalGenreText(item.genre_ids),
                 releaseDate: date,
-                subTitle: `${date ? date.substring(0, 4) : "未知"}`, 
-                description: `${date}\n${item.overview || "暂无简介"}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
+                subTitle: `${date ? date.substring(0, 4) : "未知"}`,
+                description: item.overview || "", posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
                 _popularity: item.popularity || 0,
                 _date: date || "1970-01-01"
             };
@@ -461,9 +464,9 @@ async function fetchGenreRankData(mediaType, genre, region, sort_rule, page) {
 
 async function loadGenreRank(params = {}) {
     const page = parseInt(params.page) || 1;
-    const mediaType = params.sort_by || "all"; 
-    const genre = params.genre || "all"; 
-    const region = params.region || "all"; 
+    const mediaType = params.sort_by || "all";
+    const genre = params.genre || "all";
+    const region = params.region || "all";
     const sort_rule = params.order_rule || "popularity";
 
     if (mediaType === "all") {
@@ -472,12 +475,12 @@ async function loadGenreRank(params = {}) {
             fetchGenreRankData("tv", genre, region, sort_rule, page)
         ]);
         let items = [...movies, ...tvs];
-        items.sort((a, b) => { 
-            if (sort_rule === "popularity") return b._popularity - a._popularity; 
-            else if (sort_rule === "time") return new Date(b._date) - new Date(a._date); 
-            else return b.rating - a.rating; 
+        items.sort((a, b) => {
+            if (sort_rule === "popularity") return b._popularity - a._popularity;
+            else if (sort_rule === "time") return new Date(b._date) - new Date(a._date);
+            else return b.rating - a.rating;
         });
-        items = items.slice(0, 20); 
+        items = items.slice(0, 20);
         if (items.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "未找到符合条件" }] : [];
         return items;
     } else {
@@ -517,9 +520,9 @@ async function loadVarietyShows(params = {}) {
     } else if (list_type === "hot") {
         queryParams.sort_by = "popularity.desc";
     } else if (list_type === "trend") {
-        queryParams.sort_by = "popularity.desc"; queryParams["first_air_date.gte"] = fiveYearsAgoStr; 
+        queryParams.sort_by = "popularity.desc"; queryParams["first_air_date.gte"] = fiveYearsAgoStr;
     } else if (list_type === "top") {
-        queryParams.sort_by = "vote_average.desc"; queryParams["vote_count.gte"] = 15; 
+        queryParams.sort_by = "vote_average.desc"; queryParams["vote_count.gte"] = 15;
     }
 
     try {
@@ -527,14 +530,14 @@ async function loadVarietyShows(params = {}) {
         const items = res.results || [];
         if (items.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "暂无综艺数据" }] : [];
         return items.map(item => {
-            const date = item.release_date || item.first_air_date || ""; 
+            const date = item.release_date || item.first_air_date || "";
             let genreLabel = getGlobalGenreText(item.genre_ids);
             if (genreLabel === "影视") genreLabel = "综艺";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: "tv", title: item.title || item.name,
-                genreTitle: genreLabel, releaseDate: date, 
-                subTitle: `${date ? date.substring(0, 4) : "未知"}`, 
-                description: `${date}\n${item.overview || "暂无简介"}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : ""
+                genreTitle: genreLabel, releaseDate: date,
+                subTitle: `${date ? date.substring(0, 4) : "未知"}`,
+                description: item.overview || "", posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : ""
             };
         });
     } catch (e) { return [{ id: "err", type: "text", title: "加载失败" }]; }
@@ -559,19 +562,74 @@ async function loadRottenTomatoesTrends(listType, page) {
 }
 
 async function fetchRottenTomatoesList(type) {
+    const RT_URLS = {
+        "rt_movies_theater": "https://www.rottentomatoes.com/browse/movies_in_theaters/sort:popular?minTomato=75",
+        "rt_movies_home": "https://www.rottentomatoes.com/browse/movies_at_home/sort:popular?minTomato=75",
+        "rt_movies_best": "https://www.rottentomatoes.com/browse/movies_at_home/sort:critic_highest?minTomato=90",
+        "rt_tv_popular": "https://www.rottentomatoes.com/browse/tv_series_browse/sort:popular?minTomato=75",
+        "rt_tv_new": "https://www.rottentomatoes.com/browse/tv_series_browse/sort:newest?minTomato=75"
+    };
     const url = RT_URLS[type] || RT_URLS["rt_movies_home"];
+
     try {
-        const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0" } });
-        const $ = Widget.html.load(res.data || "");
-        const items = [];
-        $('[data-qa="discovery-media-list-item"]').each((i, el) => {
-            const $el = $(el);
-            const title = $el.find('[data-qa="discovery-media-list-item-title"]').text().trim();
-            if (!title) return;
-            const scoreEl = $el.find('score-pairs');
-            items.push({ title: title, tomatoScore: scoreEl.attr('critics-score') || "", popcornScore: scoreEl.attr('audiencescore') || "", mediaType: type.includes("tv") ? "tv" : "movie" });
+        const res = await Widget.http.get(url, {
+            headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" }
         });
-        return items;
+        const html = typeof res === 'string' ? res : (res.data || "");
+        const $ = Widget.html.load(html);
+        const items = [];
+
+        // 🚀 同步：逆向DOM树遍历解析
+        const titleNodes = $('[data-qa="discovery-media-list-item-title"], [data-qa="list-item-title"], .js-tile-link .p--small');
+
+        if (titleNodes.length > 0) {
+            titleNodes.each((i, el) => {
+                const title = $(el).text().trim();
+                if (!title) return;
+
+                // 像爬树一样往上找：匹配最稳定的卡片容器
+                let container = $(el).parent();
+                for (let level = 0; level < 5; level++) {
+                    if (container.find('score-board, score-pairs, score-pairs-deprecated').length > 0) break;
+                    if (container.length === 0) break;
+                    container = container.parent();
+                }
+
+                let tomatoScore = "";
+                let popcornScore = "";
+
+                // 兼容最新版 <score-board> 和老版标签
+                const scoreTags = ['score-board', 'score-pairs', 'score-pairs-deprecated'];
+                for (const tag of scoreTags) {
+                    const scoreEl = container.find(tag);
+                    if (scoreEl.length > 0) {
+                        tomatoScore = scoreEl.attr('tomatometerscore') || scoreEl.attr('critics-score') || scoreEl.attr('criticsscore') || "";
+                        popcornScore = scoreEl.attr('audiencescore') || scoreEl.attr('audience-score') || "";
+                        break;
+                    }
+                }
+
+                items.push({
+                    title: title,
+                    tomatoScore: tomatoScore,
+                    popcornScore: popcornScore,
+                    mediaType: type.includes("tv") ? "tv" : "movie"
+                });
+            });
+        }
+
+        // 去重防御
+        const uniqueItems = [];
+        const seen = new Set();
+        for (const item of items) {
+            const cleanTitle = item.title.replace(/\s+/g, ' ').trim();
+            if (cleanTitle && !seen.has(cleanTitle)) {
+                seen.add(cleanTitle);
+                item.title = cleanTitle;
+                uniqueItems.push(item);
+            }
+        }
+        return uniqueItems;
     } catch (e) { return []; }
 }
 
@@ -586,11 +644,11 @@ async function searchRtTmdb(rtItem, rank) {
         if (rtItem.popcornScore) scores.push(`🍿 ${rtItem.popcornScore}%`);
         const customSub = scores.join("  ") || "烂番茄认证";
         const dateStr = match.first_air_date || match.release_date || "";
-        
+
         return {
-            id: String(match.id), tmdbId: match.id, type: "tmdb", mediaType: rtItem.mediaType, title: `${rank}. ${match.name || match.title}`, 
+            id: String(match.id), tmdbId: match.id, type: "tmdb", mediaType: rtItem.mediaType, title: `${rank}. ${match.name || match.title}`,
             genreTitle: getGlobalGenreText(match.genre_ids) || (rtItem.mediaType === "movie" ? "电影" : "剧集"),
-            description: `${dateStr}\n原名: ${rtItem.title}`, releaseDate: dateStr, subTitle: customSub, posterUrl: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : "", backdropUrl: match.backdrop_path ? `https://image.tmdb.org/t/p/w780${match.backdrop_path}` : ""
+            description: match.overview || "", releaseDate: dateStr, subTitle: customSub, posterUrl: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : "", backdropUrl: match.backdrop_path ? `https://image.tmdb.org/t/p/w780${match.backdrop_path}` : ""
         };
     } catch (e) { return null; }
 }
@@ -598,13 +656,13 @@ async function searchRtTmdb(rtItem, rank) {
 function buildImdbItem(item, forceType) {
     if (!item) return null;
     const type = forceType || item.media_type || (item.title ? "movie" : "tv");
-    const fullDate = item.release_date || item.first_air_date || ""; 
+    const fullDate = item.release_date || item.first_air_date || "";
     return {
         id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: type, title: item.title || item.name,
-        subTitle: fullDate || "", 
-        description: fullDate ? `${fullDate}\n${item.overview || "暂无简介"}` : (item.overview || "暂无简介"),
+        subTitle: fullDate || "",
+        description: item.overview || "",
         releaseDate: fullDate, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-        year: fullDate.substring(0, 4), 
+        year: fullDate.substring(0, 4),
         genreTitle: getGlobalGenreText(item.genre_ids) || (type === "tv" ? "剧集" : "电影")
     };
 }
@@ -653,11 +711,11 @@ async function handleTraktList(listType, traktType, traktClientId, page) {
     } else {
         rawData = await fetchTraktData(traktType, listType, traktClientId, page);
     }
-    if (!rawData || rawData.length === 0) return page === 1 ? [] : []; 
+    if (!rawData || rawData.length === 0) return page === 1 ? [] : [];
     const promises = rawData.slice(0, 20).map(async (item, index) => {
         let subject = item.show || item.movie || item;
         const mediaType = item.show ? "tv" : "movie";
-        let stats = listType === "trending" ? `🔥 ${item.watchers || 0} 人在看` : (listType === "anticipated" ? `❤️ ${item.list_count || 0} 人想看` : `No. ${(page - 1) * 15 + index + 1}`); 
+        let stats = listType === "trending" ? `🔥 ${item.watchers || 0} 人在看` : (listType === "anticipated" ? `❤️ ${item.list_count || 0} 人想看` : `No. ${(page - 1) * 15 + index + 1}`);
         if (traktType === "all") stats = `[${mediaType === "tv" ? "剧" : "影"}] ${stats}`;
         if (!subject || !subject.ids || !subject.ids.tmdb) return null;
         try {
@@ -665,8 +723,8 @@ async function handleTraktList(listType, traktType, traktClientId, page) {
             return {
                 id: String(d.id), tmdbId: d.id, type: "tmdb", mediaType: mediaType, title: d.name || d.title || subject.title,
                 genreTitle: getGlobalGenreText(d.genres?.map(g => g.id)), releaseDate: d.first_air_date || d.release_date || "",
-                subTitle: stats, 
-                description: `${d.first_air_date || d.release_date || ""}\n${d.overview || "暂无简介"}`, posterUrl: d.poster_path ? `https://image.tmdb.org/t/p/w500${d.poster_path}` : "", backdropUrl: d.backdrop_path ? `https://image.tmdb.org/t/p/w780${d.backdrop_path}` : ""
+                subTitle: stats,
+                description: d.overview || "", posterUrl: d.poster_path ? `https://image.tmdb.org/t/p/w500${d.poster_path}` : "", backdropUrl: d.backdrop_path ? `https://image.tmdb.org/t/p/w780${d.backdrop_path}` : ""
             };
         } catch (e) { return null; }
     });
@@ -678,7 +736,7 @@ function mergeDoubanTmdb(target, source) {
     target.posterPath = source.poster_path ? `https://image.tmdb.org/t/p/w500${source.poster_path}` : target.posterPath;
     target.backdropPath = source.backdrop_path ? `https://image.tmdb.org/t/p/w780${source.backdrop_path}` : "";
     const date = source.first_air_date || source.release_date || ""; target.genreTitle = getGlobalGenreText(source.genre_ids) || (target.mediaType === "tv" ? "剧集" : "电影"); target.releaseDate = date;
-    target.description = (date ? `${date} · ${target.subTitle}` : target.subTitle) + (source.overview ? `\n${source.overview}` : "\n暂无简介"); target.rating = source.vote_average ? parseFloat(source.vote_average) : 0;
+    target.description = source.overview || ""; target.rating = source.vote_average ? parseFloat(source.vote_average) : 0;
 }
 
 async function searchTmdbForDouban(query, type) {
@@ -694,11 +752,11 @@ async function fetchDoubanAndMap(tag, type, page) {
     try {
         const randomBid = Math.random().toString(36).substring(2, 13);
         const res = await Widget.http.get(`https://movie.douban.com/j/search_subjects?type=${type}&tag=${encodeURIComponent(tag)}&sort=recommend&page_limit=20&page_start=${start}`, {
-            headers: { 
+            headers: {
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X)",
                 "Referer": "https://movie.douban.com/explore",
                 "Host": "movie.douban.com",
-                "X-Requested-With": "XMLHttpRequest", 
+                "X-Requested-With": "XMLHttpRequest",
                 "Cookie": `bid=${randomBid};`
             }
         });
@@ -706,21 +764,22 @@ async function fetchDoubanAndMap(tag, type, page) {
         const data = (typeof res.data === 'string') ? JSON.parse(res.data) : (res.data || {});
         const list = data.subjects || [];
         if (list.length === 0) return page === 1 ? [{ id: "empty", type: "text", title: "暂无数据" }] : [];
-        
+
         const promises = list.map(async item => {
-            let finalItem = { 
-                id: `db_${item.id}`, type: "tmdb", mediaType: type, 
-                title: item.title, subTitle: `豆瓣 ${item.rate}`, 
-                description: `豆瓣 ${item.rate}\n暂无简介`, 
-                genreTitle: type === "tv" ? "剧集" : "电影", posterUrl: item.cover 
+            let finalItem = {
+                id: `db_${item.id}`, type: "tmdb", mediaType: type,
+                title: item.title, subTitle: `豆瓣 ${item.rate}`,
+                description: "",
+                genreTitle: type === "tv" ? "剧集" : "电影", posterUrl: item.cover
             };
             const tmdb = await searchTmdbForDouban(item.title, type);
-            if (tmdb) mergeDoubanTmdb(finalItem, tmdb); 
+            if (!tmdb) return null;
+            mergeDoubanTmdb(finalItem, tmdb);
             return finalItem;
         });
-        return await Promise.all(promises);
-    } catch (e) { 
-        return [{ id: "err", type: "text", title: "豆瓣拒绝了请求", description: "网络IP被豆瓣限制，请切换流量(4G/5G)或更换节点。" }]; 
+        return (await Promise.all(promises)).filter(Boolean);
+    } catch (e) {
+        return [{ id: "err", type: "text", title: "豆瓣拒绝了请求", description: "网络IP被豆瓣限制，请切换流量(4G/5G)或更换节点。" }];
     }
 }
 
@@ -754,16 +813,16 @@ async function loadPlatformMatrixData(mediaType, params) {
         return res.results.map(item => {
             const date = item.first_air_date || item.release_date || "";
             return {
-                id: String(item.id), tmdbId: item.id, type: "tmdb", mediaType: mediaType, title: item.name || item.title, date: date, releaseDate: date, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "", 
+                id: String(item.id), tmdbId: item.id, type: "tmdb", mediaType: mediaType, title: item.name || item.title, date: date, releaseDate: date, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
                 genreTitle: getGlobalGenreText(item.genre_ids),
-                description: `${date}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         });
     } catch (e) { return [{ id: "err", type: "text", title: "流媒体拉取失败" }]; }
 }
 
 async function loadOfficialTop10(params = {}) {
-    const region = params.sort_by || "united-states"; 
+    const region = params.sort_by || "united-states";
     const platform = params.platform || "netflix";
     const mediaType = params.mediaType || "tv";
 
@@ -773,7 +832,7 @@ async function loadOfficialTop10(params = {}) {
         return await fetchTmdbFallback_Top10(platform, region, mediaType);
     }
 
-    const searchPromises = titles.slice(0, 10).map((title, index) => 
+    const searchPromises = titles.slice(0, 10).map((title, index) =>
         searchTmdbForTop10(title, mediaType, index + 1)
     );
 
@@ -787,26 +846,38 @@ async function loadOfficialTop10(params = {}) {
 }
 
 async function fetchFlixPatrolData(platform, region, mediaType) {
-    const url = region === "world" ? `https://flixpatrol.com/top10/${platform}/` : `https://flixpatrol.com/top10/${platform}/${region}/`;
+    const url = `https://flixpatrol.com/top10/${platform}/${region}/`;
     try {
-        const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0" } });
+        const res = await Widget.http.get(url, {
+            headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1" }
+        });
         const html = typeof res === 'string' ? res : (res.data || "");
-        if (!html) return [];
         const $ = Widget.html.load(html);
         const tables = $('.card-table tbody');
-        
-        let targetTable = null;
-        if (tables.length >= 2) targetTable = mediaType === "movie" ? tables.eq(0) : tables.eq(1);
-        else if (tables.length === 1) targetTable = tables.eq(0);
-        else return [];
+        if (tables.length === 0) return [];
 
+        // 🚀 同步：修正后的平台表格索引逻辑
+        let tableIndex = 0;
+        if (platform === "disney") {
+            tableIndex = mediaType === "all" ? 0 : (mediaType === "movie" ? 1 : 2);
+        } else if (platform === "hbo") {
+            tableIndex = mediaType === "movie" ? 0 : 1;
+        } else {
+            tableIndex = mediaType === "movie" ? 0 : (mediaType === "tv" ? 1 : 2);
+        }
+
+        if (tableIndex >= tables.length) tableIndex = tables.length - 1;
+
+        const targetTable = tables.eq(tableIndex);
         const titles = [];
         targetTable.find('tr').each((i, el) => {
-            if (i >= 10) return; 
+            if (i >= 10) return;
             const textLink = $(el).find('a.hover\\:underline').text().trim();
             const textTd = $(el).find('td').eq(2).text().trim();
             const finalTitle = textLink || textTd;
-            if (finalTitle && finalTitle.length > 1) titles.push(finalTitle.split('(')[0].trim());
+            if (finalTitle && finalTitle.length > 1) {
+                titles.push(finalTitle.split('(')[0].trim());
+            }
         });
         return titles;
     } catch (e) { return []; }
@@ -817,13 +888,13 @@ async function searchTmdbForTop10(queryTitle, mediaType, rank) {
         const data = await Widget.tmdb.get(`/search/${mediaType}`, { params: { query: queryTitle.trim(), language: "zh-CN", page: 1 } });
         if (data && data.results && data.results.length > 0) {
             let item = data.results[0];
-            const date = item.first_air_date || item.release_date || ""; 
-            
+            const date = item.first_air_date || item.release_date || "";
+
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.name || item.title,
                 releaseDate: date, year: date.substring(0, 4), genreTitle: getGlobalGenreText(item.genre_ids),
                 subTitle: `TOP ${rank}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-                description: `TOP ${rank}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         }
     } catch (e) {} return null;
@@ -835,18 +906,18 @@ async function fetchTmdbFallback_Top10(platform, region, mediaType) {
     try {
         const data = await Widget.tmdb.get(`/discover/${mediaType}`, { params: { watch_region: regionMap[region] || "US", with_watch_providers: providerMap[platform] || "8", sort_by: "popularity.desc", page: 1, language: "zh-CN" } });
         return (data.results || []).slice(0, 10).map((item, index) => {
-            const date = item.first_air_date || item.release_date || ""; 
+            const date = item.first_air_date || item.release_date || "";
             return {
                 id: String(item.id), tmdbId: parseInt(item.id), type: "tmdb", mediaType: mediaType, title: item.name || item.title,
                 releaseDate: date, year: date.substring(0, 4), genreTitle: getGlobalGenreText(item.genre_ids), subTitle: `TOP ${index + 1}`, posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "", backdropUrl: item.backdrop_path ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}` : "",
-                description: `TOP ${index + 1}\n${item.overview || "暂无简介"}`
+                description: item.overview || ""
             };
         });
     } catch (e) { return []; }
 }
 
 const GENRE_MAP = {
-    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻", 
+    16: "动画", 10759: "动作冒险", 35: "喜剧", 18: "剧情", 14: "奇幻",
     878: "科幻", 9648: "悬疑", 10749: "爱情", 27: "恐怖", 10765: "科幻奇幻"
 };
 
@@ -871,20 +942,20 @@ async function searchTmdbAnimeStrict(title1, title2, year) {
     async function doSearch(query) {
         if (!query || typeof query !== 'string') return null;
         const cleanQuery = query.replace(/第[一二三四五六七八九十\d]+[季章]/g, "").replace(/Season \d+/i, "").trim();
-        
+
         try {
             let params = { query: cleanQuery, language: "zh-CN", include_adult: false };
             if (year) params.first_air_date_year = year;
-            
+
             let res = await Widget.tmdb.get("/search/tv", { params });
             let candidates = res.results || [];
-            
+
             if (candidates.length === 0 && year) {
                 delete params.first_air_date_year;
                 res = await Widget.tmdb.get("/search/tv", { params });
                 candidates = res.results || [];
             }
-            
+
             let animeTvs = candidates.filter(r => r.genre_ids?.includes(16));
             if (animeTvs.length > 0) return animeTvs.find(r => r.poster_path) || animeTvs[0];
 
@@ -898,7 +969,7 @@ async function searchTmdbAnimeStrict(title1, title2, year) {
                 res = await Widget.tmdb.get("/search/movie", { params: mParams });
                 candidates = res.results || [];
             }
-            
+
             let animeMovies = candidates.filter(r => r.genre_ids?.includes(16));
             if (animeMovies.length > 0) return animeMovies.find(r => r.poster_path) || animeMovies[0];
 
@@ -917,13 +988,13 @@ async function sanitizeAndEnsureTmdb(items) {
     if (!items || !Array.isArray(items)) return [];
     const promises = items.map(async (item) => {
         const title = item.name_cn || item.title || item.name;
-        const subTitle = item.title !== title ? item.title : null; 
+        const subTitle = item.title !== title ? item.title : null;
         const rawDate = item.releaseDate || item.description || item.air_date || item.info || "";
         const yearMatch = rawDate.match(/(\d{4})/);
         const year = yearMatch ? yearMatch[1] : null;
 
         const tmdbMatch = await searchTmdbAnimeStrict(title, subTitle, year);
-        
+
         if (tmdbMatch) {
             return {
                 id: String(tmdbMatch.id),
@@ -932,14 +1003,14 @@ async function sanitizeAndEnsureTmdb(items) {
                 mediaType: tmdbMatch.title ? "movie" : "tv",
                 title: tmdbMatch.name || tmdbMatch.title || title,
                 genreTitle: getGenreText(tmdbMatch.genre_ids),
-                description: tmdbMatch.first_air_date || tmdbMatch.release_date || parseDate(rawDate) || "即将播出",
+                description: tmdbMatch.overview || "",
                 releaseDate: tmdbMatch.first_air_date || tmdbMatch.release_date || parseDate(rawDate), posterUrl: tmdbMatch.poster_path ? `https://image.tmdb.org/t/p/w500${tmdbMatch.poster_path}` : "", backdropUrl: tmdbMatch.backdrop_path ? `https://image.tmdb.org/t/p/w780${tmdbMatch.backdrop_path}` : "",
                 rating: tmdbMatch.vote_average ? tmdbMatch.vote_average.toFixed(1) : (item.rating || "0.0")
             };
         }
-        return null; 
+        return null;
     });
-    
+
     const results = await Promise.all(promises);
     return results.filter(Boolean);
 }
@@ -951,12 +1022,12 @@ async function loadBangumiCalendar(params = {}) {
         const jsDay = new Date().getDay();
         targetDayId = jsDay === 0 ? 7 : jsDay;
     }
-    
+
     try {
         const res = await Widget.http.get("https://api.bgm.tv/calendar");
         const dayData = (res.data || []).find(d => d.weekday && d.weekday.id === targetDayId);
         if (!dayData) return [];
-        
+
         const pageSize = 20;
         const pageItems = dayData.items.slice((page - 1) * pageSize, page * pageSize);
 
@@ -979,7 +1050,7 @@ async function loadBangumiCalendar(params = {}) {
                 desc: tmdbItem.overview || item.summary || "暂无简介"
             });
         });
-        
+
         const results = await Promise.all(promises);
         return results.filter(Boolean);
     } catch (e) { return []; }
@@ -990,7 +1061,7 @@ async function loadBangumiCalendar(params = {}) {
 // =========================================================================
 async function fetchRecentHot(params = {}) {
     const url = "https://raw.githubusercontent.com/MakkaPakka518/List/refs/heads/main/data/bangumi-hot.json";
-    
+
     try {
         const res = await Widget.http.get(url);
         const data = res.data || {};
@@ -1007,10 +1078,6 @@ async function fetchRecentHot(params = {}) {
         const pageItems = hotList.slice(start, start + pageSize);
 
         return pageItems.map((item, index) => {
-            // 智能过滤简介：去除原数据自带的第一行（年份·评分·国家），防止和原生排版重复
-            const descLines = (item.description || "").split('\n');
-            const pureDesc = descLines.length > 1 ? descLines.slice(1).join('\n') : item.description;
-
             return buildItem({
                 id: item.id,
                 tmdbId: item.tmdbId,
@@ -1021,10 +1088,10 @@ async function fetchRecentHot(params = {}) {
                 backdrop: item.backdropPath,
                 genreText: item.genreTitle,
                 subTitle: `🔥 热度 TOP ${start + index + 1}`,
-                desc: pureDesc || "暂无简介"
+                desc: item.description || item.overview || ""
             });
         });
-        
+
     } catch (error) {
         return [{ id: "error", type: "text", title: "网络异常", description: "获取热门列表失败" }];
     }
@@ -1044,7 +1111,7 @@ async function fetchAirtimeRanking(params = {}) {
     if (ScrapingCache.airtime[cacheKey]) {
         return await sanitizeAndEnsureTmdb(ScrapingCache.airtime[cacheKey]);
     }
-    
+
     let url = `https://bgm.tv/${category}/browser/airtime/${year}/${month}?sort=${sort}&page=${page}`;
     const results = await DynamicDataProcessor.processBangumiPage(url, category);
     ScrapingCache.airtime[cacheKey] = results;
@@ -1056,10 +1123,10 @@ async function fetchDailyCalendarApi(params = {}) {
         ScrapingCache.daily = await DynamicDataProcessor.processDailyCalendar();
     }
     let items = ScrapingCache.daily || [];
-    
+
     const { filterType = "today", specificWeekday = "1", dailySortOrder = "popularity_rat_bgm" } = params;
     const JS_DAY_TO_BGM_API_ID = { 0: 7, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 };
-    
+
     let filteredByDay = [];
     if (filterType === "all_week") {
         filteredByDay = items;
@@ -1093,8 +1160,8 @@ async function fetchDailyCalendarApi(params = {}) {
 }
 
 async function loadBilibiliRank(params = {}) {
-    const { sort_by = "1", page = 1 } = params; 
-    const url = `https://api.bilibili.com/pgc/web/rank/list?day=3&season_type=${sort_by}`; 
+    const { sort_by = "1", page = 1 } = params;
+    const url = `https://api.bilibili.com/pgc/web/rank/list?day=3&season_type=${sort_by}`;
     try {
         const res = await Widget.http.get(url, { headers: { "User-Agent": "Mozilla/5.0", "Referer": "https://www.bilibili.com/" } });
         const data = res.data || {};
@@ -1105,7 +1172,7 @@ async function loadBilibiliRank(params = {}) {
         const promises = slicedList.map(async (item) => {
             const cleanTitle = item.title.replace(/第[一二三四五六七八九十\d]+[季章]/g, "").trim();
             const tmdbItem = await searchTmdbAnimeStrict(cleanTitle, item.title, null);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({
                 id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title,
                 date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1),
@@ -1113,17 +1180,17 @@ async function loadBilibiliRank(params = {}) {
             });
         });
         const results = await Promise.all(promises);
-        return results.filter(Boolean); 
+        return results.filter(Boolean);
     } catch (e) { return []; }
 }
 
 async function loadTmdbAnimeRanking(params = {}) {
-    const { sort_by = "trending", page = 1 } = params; 
+    const { sort_by = "trending", page = 1 } = params;
     let queryParams = { language: "zh-CN", page: page, with_genres: "16", with_original_language: "ja" };
-    
-    if (sort_by === "trending") queryParams.sort_by = "popularity.desc"; 
-    else if (sort_by === "new") queryParams.sort_by = "first_air_date.desc"; 
-    else if (sort_by === "top") queryParams.sort_by = "vote_average.desc"; 
+
+    if (sort_by === "trending") queryParams.sort_by = "popularity.desc";
+    else if (sort_by === "new") queryParams.sort_by = "first_air_date.desc";
+    else if (sort_by === "top") queryParams.sort_by = "vote_average.desc";
 
     try {
         const res = await Widget.tmdb.get("/discover/tv", { params: queryParams });
@@ -1134,14 +1201,14 @@ async function loadTmdbAnimeRanking(params = {}) {
 }
 
 async function loadAniListRanking(params = {}) {
-    const { sort_by = "TRENDING_DESC", page = 1 } = params; 
-    const query = `query ($page: Int, $perPage: Int) { Page (page: $page, perPage: $perPage) { media (sort: ${sort_by}, type: ANIME) { title { native romaji english } averageScore seasonYear } } }`; 
+    const { sort_by = "TRENDING_DESC", page = 1 } = params;
+    const query = `query ($page: Int, $perPage: Int) { Page (page: $page, perPage: $perPage) { media (sort: ${sort_by}, type: ANIME) { title { native romaji english } averageScore seasonYear } } }`;
     try {
         const res = await Widget.http.post("https://graphql.anilist.co", { query, variables: { page, perPage: 20 } });
         const data = res.data?.data?.Page?.media || [];
         const promises = data.map(async (media) => {
             const tmdbItem = await searchTmdbAnimeStrict(media.title.native || media.title.romaji, media.title.english, media.seasonYear);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({ id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title, date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1), genreText: getGlobalGenreText(tmdbItem.genre_ids), desc: tmdbItem.overview });
         });
         const results = await Promise.all(promises);
@@ -1150,17 +1217,17 @@ async function loadAniListRanking(params = {}) {
 }
 
 async function loadMalRanking(params = {}) {
-    const { sort_by = "airing", page = 1 } = params; 
+    const { sort_by = "airing", page = 1 } = params;
     let apiParams = { page: page };
-    if (sort_by === "airing") apiParams.filter = "airing"; 
-    else if (sort_by === "upcoming") apiParams.filter = "upcoming"; 
+    if (sort_by === "airing") apiParams.filter = "airing";
+    else if (sort_by === "upcoming") apiParams.filter = "upcoming";
 
     try {
         const res = await Widget.http.get("https://api.jikan.moe/v4/top/anime", { params: apiParams });
         const data = res.data?.data || [];
         const promises = data.map(async (item) => {
             const tmdbItem = await searchTmdbAnimeStrict(item.title_japanese || item.title, item.title_english, null);
-            if (!tmdbItem) return null; 
+            if (!tmdbItem) return null;
             return buildItem({ id: tmdbItem.id, tmdbId: tmdbItem.id, type: "tv", title: tmdbItem.name || tmdbItem.title, date: tmdbItem.first_air_date, poster: tmdbItem.poster_path, backdrop: tmdbItem.backdrop_path, rating: tmdbItem.vote_average?.toFixed(1), genreText: getGlobalGenreText(tmdbItem.genre_ids), desc: tmdbItem.overview });
         });
         const results = await Promise.all(promises);
@@ -1210,3 +1277,29 @@ const DynamicDataProcessor = (() => {
     }
     return { processBangumiPage, processDailyCalendar };
 })();
+
+// Rex 根据 TMDB 身份和客户端语言/海报偏好完成首次元数据渲染。
+function toRexTmdbIdentities(items) {
+    return (Array.isArray(items) ? items : []).map(item => {
+        if (!item) return null;
+        if (item.type === "text") return item;
+        const mediaType = item.mediaType;
+        const tmdbId = Number(item.tmdbId || item.id);
+        if (!tmdbId || !["movie", "tv"].includes(mediaType)) return null;
+        return { id: `${mediaType}.${tmdbId}`, type: "tmdb" };
+    }).filter(Boolean);
+}
+
+function identityRoute(handler) {
+    return async function(params = {}) {
+        return toRexTmdbIdentities(await handler(params));
+    };
+}
+
+routeAnimeOmni = identityRoute(routeAnimeOmni);
+loadGenreRank = identityRoute(loadGenreRank);
+routeMovieOmni = identityRoute(routeMovieOmni);
+loadVarietyShows = identityRoute(loadVarietyShows);
+routeTrendsHub = identityRoute(routeTrendsHub);
+loadPlatformMatrix = identityRoute(loadPlatformMatrix);
+loadOfficialTop10 = identityRoute(loadOfficialTop10);
